@@ -39,7 +39,7 @@ mobile application, mobile web, business process, jBPM, jBPM Console, mgwt
 \chapter{Introduction}
 This is the first chapter of the thesis.
 
-\chapter{Mobile application development}
+\chapter{Mobile applications development}
 There are many different approaches to the development of mobile applications.
 Each of them with its advantages and disadvantages is suitable for another purpose.
 To better understand the differences between these approaches, they can be divided into three categories.
@@ -68,7 +68,7 @@ Mobile web applications are special web pages optimized for mobile devices.
 They take into account the limitations and differences of these devices in comparison with desktop computers.
 These include smaller screen size, higher fineness of the display, absence of mouse and keyboard, presence of touch control and limited computation power.
 But the basic principles of all web pages are also applied in this case.
-So you can still find HTML, CSS and JavaScript on the client's side and the server-side functionality implemented in any suitable language, e.g. PHP, Ruby, Python or even Java.
+So you can still find HTML\footnotemark\footnotetext{HyperText Markup Language}, CSS\footnotemark\footnotetext{Cascading Style Sheets} and JavaScript on the client's side and the server-side functionality implemented in any suitable language, e.g. PHP, Ruby, Python or even Java.
 
 The biggest advantage of this approach in comparison with the native applications is that developers do not need to maintain more versions of the application.
 This does not only mean that there is one common version for all platforms as users access the application using the web browser.
@@ -103,6 +103,18 @@ Some actions might be very difficult to perform on the mobile device so they are
 This approach is prefered to be used also in situations when there is an existing application which is too complex to be changed using the techniques of responsive web design.
 
 \section{Hybrid applications}
+Hybrid applications combine the best features of the previous two approaches.
+They allow developers to create cross-platform applications that can use some advanced functionality of each platform.
+This is achieved by adding another layer which provides JavaScript API\footnotemark\footnotetext{Application programming interface} that is common for all platforms.
+This API's calls are then translated to native platform-specific API calls.
+Such applications are usually written in HTML, CSS and JavaScript.
+Then they are packaged as a typical native applications for each platform which means they can be distributed by markets.
+
+The biggest advantage of this approach is that you write only one common code for all platforms.
+Developers do not have to learn to use platform-specific tools.
+They just get by with the basic web development skills and the knowledge of the provided JavaScript API which allows them to use functions like accelerometer, camera, compass, contacts, file storage, geolocation or notifications.
+
+The drawback of this solution might be the fact that even though you produce applications built for the given platform they do not reach the performance of the native ones.
 \subsection{Web wrapper}
 \subsection{Web-to-native converter}
 \subsection{Native JavaScript API}
