@@ -1,4 +1,10 @@
 fi-logo.514pk
 fi-logo.600pk
 fi-logo.tfm
+*.aux
+*.bbl
+*.blg
+*.log
+*.pdf
+*.toc
 *.swp

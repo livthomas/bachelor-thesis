@@ -33,24 +33,87 @@ The aim of the bachelor work is to provide...
 mobile application, mobile web, business process, jBPM, jBPM Console, mgwt
 \end{ThesisKeyWords}
 
-\tableofcontents % prints table of contents
+\tableofcontents
 
 \MainMatter
 \chapter{Introduction}
 This is the first chapter of the thesis.
 
 \chapter{Mobile application development}
-\section{Native (platform-specific) application}
-\section{Mobile web application}
-\section{Hybrid (cross-platform) application}
+There are many different approaches to the development of mobile applications.
+Each of them with its advantages and disadvantages is suitable for another purpose.
+To better understand the differences between these approaches, they can be divided into three categories.
+
+\section{Native applications}
+Native applications are designed for the specific platform, e.g. Android, iOS or Windows Phone.
+These applications are installed directly into the target device and are distributed by online markets which are usually platform-specific and offer free as well as paid content.
+The examples of such stores are Google Play\footnotemark\footnotetext{https://play.google.com/store}, App Store\footnotemark\footnotetext{http://store.apple.com} or Windows Phone Store\footnotemark\footnotetext{http://www.windowsphone.com/en-us/store}.
+
+While developing a native application you have a full access to all the advanced features of the chosen platform like special hardware or OS\footnotemark\footnotetext{Operating system}-specific functions.
+Such software has much better performance than the one created using other approaches because of the lower level of abstraction.
+Because these applications are distributed by the mentioned markets, they can be easily monetized.
+The presence in the market also allows the discoverability of the work of lesser-known authors (or companies) as users can find all applications on one place.
+Another advantage of the centralized application market under the control of the company which develops given platform is that it ensures the quality and safety of the applications.
+
+On the other sometimes there may be a conflict between the author's idea of licensing, pricing or updating policy of the application and the rules that must be followed to place the application into the market.
+In such cases it is much more difficult to distribute native applications without using the market because the third-part applications are often considered as a security hole and their installation is not allowed by default.
+Another problem might be the fact that every platform has its own set of development tools (programming languages and SDKs\footnotemark\footnotetext{Software development kit}) which makes it practically impossible to create cross-platform applications.
+This means that a new application needs to be created for each platform which increases the costs of the development proccess.
+Users can also use older versions of the application which may bring some additional problems especially when developers add some new functionality to the application that is communicating with the remote devices.
+In such cases there is a need for backward compatibility between the different versions.
+This may prevent developers from making significant changes and slow down the whole development process.
+
+\section{Mobile web applications}
+Mobile web applications are special web pages optimized for mobile devices.
+They take into account the limitations and differences of these devices in comparison with desktop computers.
+These include smaller screen size, higher fineness of the display, absence of mouse and keyboard, presence of touch control and limited computation power.
+But the basic principles of all web pages are also applied in this case.
+So you can still find HTML, CSS and JavaScript on the client's side and the server-side functionality implemented in any suitable language, e.g. PHP, Ruby, Python or even Java.
+
+The biggest advantage of this approach in comparison with the native applications is that developers do not need to maintain more versions of the application.
+This does not only mean that there is one common version for all platforms as users access the application using the web browser.
+It also means that all users use the latest version of the application as it is the only one deployed on the server at the time.
+This is a significant factor in reducing the development costs as it allows developers not to bother with a backward compatibility so much and make big changes more quickly.
+Another important advantage is the fact that developers are not limited by a particular programming language and tools provided for the specific platform.
+On the server side they can use any programming language that is supported by the server with any framework or third-part libraries.
+
+However, some new problems might appear when designing mobile web applications.
+As users might use various web browsers in different versions there is a need to optimize the application for several versions of all commonly used browsers.
+Another thing is the monetizing of this kind of application.
+The developers have to set up the advertisements on their own.
+They also have to implement their own solution to charge users for using the application.
+
+When designing a mobile web application it is often created as a subset of the funcionality of an existing web application.
+In such cases there is usually an intension to somehow connect these two versions to support uniformity and avoid code duplicates.
+Nowadays there are basically two ways how to integrate them to one final solution.
+
+\subsection{Responsive design}
+Responsive web design is a technique for developing web applications optimized for different types of devices.
+It uses CSS and JavaScript to adapt the page content to the actual size of the browser's window.
+This technique is suitable when developing a mobile version side-by-side with the full web application.
+
+\subsection{Adaptive delivery}
+Adaptive delivery is very similar to the responsive web design.
+The main difference is the time when it is decided how the requested page will look like.
+While using responsive design it is decided on the client's side by CSS and JavaScript according to the browser's window size, the adaptive delivery is based on different principle.
+A type of the client's device is recognized on the server side and only a page for this type of device is sent to the client.
+This reduces the amount of incoming traffic on the client side.
+It also allows developers to include only relevant parts of the original application in the mobile version.
+Some actions might be very difficult to perform on the mobile device so they are likely not to be used and can be ommited from the mobile version.
+This approach is prefered to be used also in situations when there is an existing application which is too complex to be changed using the techniques of responsive web design.
+
+\section{Hybrid applications}
+\subsection{Web wrapper}
+\subsection{Web-to-native converter}
+\subsection{Native JavaScript API}
 
 \chapter{Business processes and jBPM}
-\section{Business processes}
+\section{Business Process Model and Notation}
 \section{jBPM}
 \section{jBPM Console}
 
-\chapter{Requirements}
-\section{Compatibility}
+\chapter{Analysis and design}
+\section{Requirements}
 
 \chapter{Implementation}
 \section{Technologies}
@@ -63,7 +126,7 @@ This is the first chapter of the thesis.
 
 \chapter{Results}
 
-\bibliographystyle{plain} % sets plain bibliography style
-\bibliography{bib-db} % BibTeX database file
+\bibliographystyle{plain}
+\bibliography{bibliography}
 
 \end{document}
