@@ -2,7 +2,7 @@
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[plainpages=false,pdfpagelabels,unicode]{hyperref}
+\usepackage[plainpages=false,pdfpagelabels,unicode]{hyperref} %final
 \thesistitle{Mobile Access to jBPM Console}
 \thesissubtitle{Bachelor thesis}
 \thesisstudent{Tomáš Livora}
@@ -11,6 +11,7 @@
 \thesisyear{spring 2014}
 \thesisadvisor{RNDr. Adam Rambousek}
 \thesislang{en}
+\overfullrule=0pt
 
 \begin{document}
 \FrontMatter
@@ -45,11 +46,11 @@ Each of them with its advantages and disadvantages is suitable for another purpo
 To better understand the differences between these approaches, they can be divided into three categories.
 
 \section{Native applications}
-Native applications are designed for the specific platform, e.g. Android, iOS or Windows Phone.
+Native applications are designed for the specific platform, e.g. Android, BlackBerry, iOS or Windows Phone.
 These applications are installed directly into the target device and are distributed by online markets which are usually platform-specific and offer free as well as paid content.
-The examples of such stores are Google Play\footnotemark\footnotetext{https://play.google.com/store}, App Store\footnotemark\footnotetext{http://store.apple.com} or Windows Phone Store\footnotemark\footnotetext{http://www.windowsphone.com/en-us/store}.
+The examples of such stores are App Store\footnotemark\footnotetext{\url{http://store.apple.com}}, BlackBerry World\footnotemark\footnotetext{\url{http://appworld.blackberry.com}}, Google Play\footnotemark\footnotetext{\url{https://play.google.com/store}} or Windows Phone Store\footnotemark\footnotetext{\url{http://www.windowsphone.com/en-us/store}}.
 
-While developing a native application you have a full access to all the advanced features of the chosen platform like special hardware or OS\footnotemark\footnotetext{Operating system}-specific functions.
+While developing a native application you have a full access to all the advanced features of the chosen platform like special hardware or operating system-specific functions.
 Such software has much better performance than the one created using other approaches because of the lower level of abstraction.
 Because these applications are distributed by the mentioned markets, they can be easily monetized.
 The presence in the market also allows the discoverability of the work of lesser-known authors (or companies) as users can find all applications on one place.
@@ -57,7 +58,7 @@ Another advantage of the centralized application market under the control of the
 
 On the other sometimes there may be a conflict between the author's idea of licensing, pricing or updating policy of the application and the rules that must be followed to place the application into the market.
 In such cases it is much more difficult to distribute native applications without using the market because the third-part applications are often considered as a security hole and their installation is not allowed by default.
-Another problem might be the fact that every platform has its own set of development tools (programming languages and SDKs\footnotemark\footnotetext{Software development kit}) which makes it practically impossible to create cross-platform applications.
+Another problem might be the fact that every platform has its own set of development tools, programming languages and software development kits (SDKs), which make it practically impossible to create cross-platform applications.
 This means that a new application needs to be created for each platform which increases the costs of the development proccess.
 Users can also use older versions of the application which may bring some additional problems especially when developers add some new functionality to the application that is communicating with the remote devices.
 In such cases there is a need for backward compatibility between the different versions.
@@ -68,7 +69,7 @@ Mobile web applications are special web pages optimized for mobile devices.
 They take into account the limitations and differences of these devices in comparison with desktop computers.
 These include smaller screen size, higher fineness of the display, absence of mouse and keyboard, presence of touch control and limited computation power.
 But the basic principles of all web pages are also applied in this case.
-So you can still find HTML\footnotemark\footnotetext{HyperText Markup Language}, CSS\footnotemark\footnotetext{Cascading Style Sheets} and JavaScript on the client's side and the server-side functionality implemented in any suitable language, e.g. PHP, Ruby, Python or even Java.
+So you can still find HyperText Markup Language (HTML), Cascading Style Sheets (CSS) and JavaScript on the client's side and the server-side functionality implemented in any suitable language, e.g. PHP, Ruby, Python, Perl or even Java.
 
 The biggest advantage of this approach in comparison with the native applications is that developers do not need to maintain more versions of the application.
 This does not only mean that there is one common version for all platforms as users access the application using the web browser.
@@ -89,7 +90,7 @@ Nowadays there are basically two ways how to integrate them to one final solutio
 
 \subsection{Responsive design}
 Responsive web design is a technique for developing web applications optimized for different types of devices.
-It uses CSS and JavaScript to adapt the page content to the actual size of the browser's window.
+It uses mostly CSS but also JavaScript to adapt the page content to the actual size of the browser's window.
 This technique is suitable when developing a mobile version side-by-side with the full web application.
 
 \subsection{Adaptive delivery}
@@ -105,7 +106,7 @@ This approach is prefered to be used also in situations when there is an existin
 \section{Hybrid applications}
 Hybrid applications combine the best features of the previous two approaches.
 They allow developers to create cross-platform applications that can use some advanced functionality of each platform.
-This is achieved by adding another layer which provides JavaScript API\footnotemark\footnotetext{Application programming interface} that is common for all platforms.
+This is achieved by adding another layer which provides JavaScript application programming interface (API) that is common for all platforms.
 This API's calls are then translated to native platform-specific API calls.
 Such applications are usually written in HTML, CSS and JavaScript.
 Then they are packaged as a typical native applications for each platform which means they can be distributed by markets.
@@ -120,7 +121,7 @@ The drawback of this solution might be the fact that even though you produce app
 \subsection{Native JavaScript API}
 
 \chapter{Business processes and jBPM}
-\section{Business Process Model and Notation}
+\section{BPMN}
 \section{jBPM}
 \section{jBPM Console}
 
