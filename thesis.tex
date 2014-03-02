@@ -38,19 +38,46 @@ mobile application, mobile web, business process, jBPM, jBPM Console, mgwt
 
 \MainMatter
 \chapter{Introduction}
-Nowadays, we can notice a rapid growth of the market with smart mobile devices like smartphones or tablets.
+Nowadays, a rapid growth of the market with smart mobile devices like smartphones or tablets can be noticed.
 The parameters of these devices are nearly reaching the performance of classic desktop computers.
 Unlike them, the mobile devices also offer comfort of mobility so users have an access to their data and applications whenever or wherever they need it.
 However, the burden of this feature is lower comfort while using most of the common applications.
-Their graphical user interface (GUI) is often optimized just for standard desktop environments and does not take into account a lower screen resolution that is typical for the mobile devices.
+Their graphical user interface (GUI) is often optimized just for standard desktop environments and does not take into account lower screen resolution that is typical for mobile devices.
 The other problem is much higher finess of the screen which causes that tiny fonts are usually unreadable without zooming in and also makes it difficult to manipulate with very small control components.
 
-The goal of this thesis is to look through the problematics of developing applications for mobile devices, compare advantages and disadvantages of different approaches and find the optimal solution for the jBPM Console\footnotemark\footnotetext{jBPM Console is an open-source application for business process management.}.
-The mobile version of this application has been proposed on the website of the JBoss community\footnotemark\footnotetext{\url{https://community.jboss.org/wiki/JbpmProjects}} as the further extension of the jBPM project.
-The thesis includes analysis, design and implementation of the chosen solution which includes the creation of a mobile version of this application with predefined subset of its functions like starting new processes or user task management.
+The goal of this thesis is to look through the problematics of developing applications optimized for mobile devices, compare advantages and disadvantages of different approaches and find the optimal solution for the jBPM Console\footnotemark\footnotetext{jBPM Console is an open-source application for business process management.}.
+The mobile version of this application has been proposed on the website of the JBoss community\footnotemark\footnotetext{\url{https://community.jboss.org/wiki/JbpmProjects}} as a further extension of the jBPM project.
+The thesis includes analysis, design, implementation and testing of the chosen solution which includes creation of a mobile version of this application with predefined subset of its functions like starting new processes or management of user tasks.
 As a part of this thesis the integration test suite was also developed.
 The resulting product should become a part of the jBPM Console project.
 This work does not aim to make a complex review of the given field and is rather focused on the topics relevant to the implementation part.
+
+The thesis starts with an analysis of different approaches to the mobile applications development.
+These are divided into three main categories -- native, web and hybrid -- based on their similar features.
+Each category is introduced naming its characteristic features.
+Then pros and cons of using the given approach are mentioned and the most suitable use case is outlined.
+Next chapter deals with business processes, explains related terms and introduces some commonly used standards.
+The motivation for using these processes is given and it is described how they are applied to today's business environment.
+Then there is explained how business processes can be automated and how modern enterprise applications based on them are developed.
+The following sections introduce business process management (BPM) suite called jBPM.
+It is described how its workflow engine works and how can be used by developers of enterprise applications.
+Also web-based application jBPM Console for managing business processes which is based on jBPM engine is introduced.
+This chapter describes the application only from the user's point of view.
+The underlying services that it is powered by are analysed in the next chapter as a part of the analysis and design of mobile application being developed.
+There are also mentioned previous attempts to create mobile version of jBPM Console.
+Their results together with other factors are considered while choosing the most suitable way of implementing this project.
+An adaptive mobile web application is chosen as the final solution.
+Next chapter describes the implementation process.
+The technologies used are described and some of the most serious problems that occured during this step are mentioned.
+The chapter about testing explains what is the main focus while testing this kind of application.
+Both unit testing of GWT components and functional testing by Selenium is performed.
+The last chapter is a summary of the work done on this project.
+The results are presented and plans for future enhancements are outlined.
+
+The outcome of this thesis is a brief overview of the problematics of developing applications optimized for mobile devices.
+This knowledge is applied while implementing a mobile version of jBPM Console.
+The output of the practical part is a fully functional mobile web application as well as the related test suite.
+The author plans to continue working on this project and improve it by implementing some other functionality that is present in the original jBPM Console application.
 
 \chapter{Mobile applications development}
 There are many different approaches to the development of mobile applications.
@@ -133,6 +160,10 @@ The drawback of this solution might be the fact that even though you produce app
 \subsection{Native JavaScript API}
 
 \chapter{Business processes and jBPM}
+Before designing a mobile version of jBPM Console it is very essential to know what is this application about and how it works.
+This chapter explains what a business process is, what related terms mean and introduces the application from the user's point of view.
+
+\section{Business process}
 A business process is a sequence of steps that need to be performed in order to accomplish an organizational goal.
 From the technical point of view it can be described as a collection of activities or tasks mutually connected to a logical structure ordered by their time continuity.
 Thanks to that a business process can be visualized as a flowchart\footnotemark\footnotetext{A flowchart is a type of diagram used to visualize a process. The individual steps of this process are displayed as various boxes which are connected to each other with arrows determining their order.}.
@@ -140,7 +171,7 @@ Thanks to that a business process can be visualized as a flowchart\footnotemark\
 Nowadays, business processes are so complex and regularly changed that it is practically impossible to hardcode them into the applications and be efficient while adapting to the changes at the same time.
 That is why business process management (BPM) tools are used.
 They take control of the maintenance of your business processes and provide API through which your application can easily manipulate with these processes.
-This allows developers to focus on the application itself and do not need to adapt it to the business changes as it is a role of the used BPM tool.
+This allows developers to focus on the application itself because they do not need to adapt it to the changes in business processes as it is a role of the used BPM tool.
 
 To simplify business process modelling and unify the used notation a few standards were created from which the most used are Business Process Execution Language (BPEL) and Business Process Model and Notation (BPMN).
 
