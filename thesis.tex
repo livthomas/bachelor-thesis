@@ -161,9 +161,9 @@ The drawback of this solution might be the fact that even though you produce app
 
 \chapter{Business processes and jBPM}
 Before designing a mobile version of jBPM Console it is very essential to know what is this application about and how it works.
-This chapter explains what a business process is, what related terms mean and introduces the application from the user's point of view.
+This chapter explains what business processes are, where they are used and how can be automated. Also the jBPM engine is introduced and web-based jBPM Console is described from the user's point of view.
 
-\section{Business process}
+\section{Business processes}
 A business process is a sequence of steps that need to be performed in order to accomplish an organizational goal.
 From the technical point of view it can be described as a collection of activities or tasks mutually connected to a logical structure ordered by their time continuity.
 Thanks to that a business process can be visualized as a flowchart\footnotemark\footnotetext{A flowchart is a type of diagram used to visualize a process. The individual steps of this process are displayed as various boxes which are connected to each other with arrows determining their order.}.
@@ -173,9 +173,15 @@ That is why business process management (BPM) tools are used.
 They take control of the maintenance of your business processes and provide API through which your application can easily manipulate with these processes.
 This allows developers to focus on the application itself because they do not need to adapt it to the changes in business processes as it is a role of the used BPM tool.
 
-To simplify business process modelling and unify the used notation a few standards were created from which the most used are Business Process Execution Language (BPEL) and Business Process Model and Notation (BPMN).
-
 \section{BPMN}
+In the past it was usual that every BPM suite implemented and used its own representation of business processes.
+As portability became one of the key issues it was necessary to somehow unify these representations and standardize the final outcome so users would be able to reuse their business processes across different BPM tools.
+
+This is why Business Process Model and Notation (BPMN), a standard maintained by the Object Management Group (OMG), was created.
+The latest version, BPMN 2.0, is both a business-friendly diagramming notation and an executable process language.
+The graphical notation of business processes is very similar to activity diagrams from Unified Modelling Language (UML).
+A process model is stored as an XML file which besides diagram description contains also other information about the process like its data, messages, task assignments etc.
+
 \section{jBPM}
 \section{jBPM Console}
 
