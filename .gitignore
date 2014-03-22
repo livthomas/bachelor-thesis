@@ -8,3 +8,5 @@ fi-logo.tfm
 *.pdf
 *.toc
 *.swp
+*.out
+

@@ -30,7 +30,7 @@ The aim of the bachelor work is to provide...
 \end{ThesisAbstract}
 
 \begin{ThesisKeyWords}
-business process, jBPM, jBPM Console, mgwt, mobile application, mobile web
+business process, JBoss, jBPM, jBPM Console, mgwt, mobile application, mobile web
 \end{ThesisKeyWords}
 
 \tableofcontents
@@ -94,7 +94,7 @@ Because these applications are distributed by the mentioned markets, they can be
 The presence in the market also allows the discoverability of the work of lesser-known authors (or companies) as users can find all applications on one place.
 Another advantage of the centralized application market under the control of the company which develops given platform is that it ensures the quality and safety of the applications.
 
-On the other sometimes there may be a conflict between the author's idea of licensing, pricing or updating policy of the application and the rules that must be followed to place the application into the market.
+On the other hand sometimes there may be a conflict between the author's idea of licensing, pricing or updating policy of the application and the rules that must be followed to place the application into the market.
 In such cases it is much more difficult to distribute native applications without using the market because the third-part applications are often considered as a security hole and their installation is not allowed by default.
 Another problem might be the fact that every platform has its own set of development tools, programming languages and software development kits (SDKs), which make it practically impossible to create cross-platform applications.
 This means that a new application needs to be created for each platform which increases the costs of the development proccess.
@@ -154,13 +154,13 @@ Developers do not have to learn to use platform-specific tools.
 They just get by with the basic web development skills and the knowledge of the provided JavaScript API which allows them to use functions like accelerometer, camera, compass, contacts, file storage, geolocation or notifications.
 
 The drawback of this solution might be the fact that even though you produce applications built for the given platform they do not reach the performance of the native ones.
-\subsection{Web wrapper}
-\subsection{Web-to-native converter}
-\subsection{Native JavaScript API}
+%\subsection{Web wrapper}
+%\subsection{Web-to-native converter}
+%\subsection{Native JavaScript API}
 
 \chapter{Business processes and jBPM}
 Before designing a mobile version of jBPM Console it is very essential to know what is this application about and how it works.
-This chapter explains what business processes are, where they are used and how can be automated. Also the jBPM engine is introduced and web-based jBPM Console is described from the user's point of view.
+This chapter explains what business processes are, where they are used and how they can be automated. Also the jBPM engine is introduced and web-based jBPM Console is described from the user's point of view.
 
 \section{Business processes}
 A business process is a sequence of steps that need to be performed in order to accomplish an organizational goal.
@@ -179,13 +179,77 @@ As portability became one of the key issues it was necessary to somehow unify th
 This is why Business Process Model and Notation (BPMN), a standard maintained by the Object Management Group (OMG), was created.
 The latest version, BPMN 2.0, is both a business-friendly diagramming notation and an executable process language.
 The graphical notation of business processes is very similar to activity diagrams from Unified Modelling Language (UML).
-A process model is stored as an XML file which besides diagram description contains also other information about the process like its data, messages, task assignments etc. \cite{silver11}
+A process model is stored as an Extensible Markup Language (XML) file which besides diagram description contains also other information about the process like its data, messages, task assignments etc. \cite{silver11}
 
 \section{jBPM}
+Java Business Process Management (jBPM) is an open-source BPM suite developed by the JBoss community.
+It can be used to easily model, execute and monitor business processes throughout their life cycle.
+The core of jBPM is a light-weight workflow engine that allows users to execute business processes using the BPMN 2.0 specification.
+That means it can be both embedded in an application or run as a service. %which users can connect to through the web-based UI or remote APIs.
+Besides the core engine, jBPM project also includes other components like web-based workbench which provides graphical user interface (GUI) for complex management of business processes and Eclipse tooling for modeling, testing and debugging of processes.
+\cite{jbpm6doc}
+
+\subsection{Workflow engine}
+The core jBPM engine is 
+
+components hierarchy
+persistence
+CDI, REST, JMS
+
 \section{jBPM Console}
+The jBPM Console is a web-based tool built on the top of the jBPM services.
+It is composed of several components like Guvnor, Designer, Form Modeller and Dashboard.
+All this projects grouped together form one unified environment for assets management, business process modeling, managing process runtime and business activity monitoring.
+
+\subsection{Graphical user interface}
+The GUI of the jBPM Console consists of several perspectives.
+Each one of them represents one step in the process life cycle.
+
+Authoring perspective is based on the Guvnor component and allows users to manage business assets.
+Individual files are stored in a virtual file system (VFS) based on Git\footnotemark\footnotetext{Git is a distributed version control system -- \url{http://git-scm.com/}} repositories.
+%These repositories are organized into bigger structures called organizational units.
+Users can create a new repositories or clone the remote ones.
+Maven\footnotemark\footnotetext{Maven is a software project management tool -- \url{http://maven.apache.org/}} projects are created inside these repositories to simplify organization of the files.
+Within these projects several types of new files can be created from which the most important are business process definitions in BPMN 2.0 format and task as well as process forms.
+Processes can be edited in their graphical representation by the Designer.
+This editor allows users to easily model business processes using the drag\&drop.
+After the editing is done a project can be build and deployed so the individual processes within it become ready to run.
+
+All deployed projects can be seen in a list which is a part of the Deploy perspective.
+Users are able to undeploy these projects or create a new deployment unit.
+
+Processes from the deployed projects are all listed in the process definitions list which is a part of the Process Management perspective.
+For each process definition there are options to start it as a new process, view its flowchart representation or view all of its instances.
+If a process is started a user is prompted to fill in the process form which consists of some input fields. %if there are any defined.
+These inputs can be for example used to initialize process variables.
+All process instances are listed in the process instance list where they can be easily controlled.
+A running process can be aborted or a signal can be sent to it by a user.
+The history of the process variables can also be viewed here.
+
+The Tasks perspective is the one responsible for human tasks management.
+Users can view all the tasks that belongs to them or to the groups they are members of.
+These tasks are usually created as a result of business process execution but users are also able to create their own personal tasks which do not participate in any process.
+Several actions can be executed on these tasks like claiming the ones that nobody is working on, starting work on the claimed tasks and completing tasks.
+%Form Modeller
+
+From all the perspectives mentioned above the Process Management and Tasks are the only one that will be included in the mobile version.
+
+\subsection{Remote access}
+
 
 \chapter{Analysis and design}
-\section{Requirements}
+To be able to design the right solution for the mobile version of jBPM Console it is essential to understand how the original application works under the hood.
+That is why this section first describes the jBPM Console from the jBPM developers' point of view and it is analyzed which services are called in the background.
+Then some previous approaches to implement a mobile version of this application are mentioned and their weaknesses are discovered.
+Finally, a solution is drafted which is considered to be the most appropriate according to the previous findings.
+
+\section{Backend of jBPM Console}
+
+\section{Previous approaches}
+Android + iPhone apps previously developed
+\cite{petovsky13}
+
+\section{Suggested solution}
 
 \chapter{Implementation}
 \section{Technologies}
