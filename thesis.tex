@@ -185,16 +185,37 @@ A process model is stored as an Extensible Markup Language (XML) file which besi
 Java Business Process Management (jBPM) is an open-source BPM suite developed by the JBoss community.
 It can be used to easily model, execute and monitor business processes throughout their life cycle.
 The core of jBPM is a light-weight workflow engine that allows users to execute business processes using the BPMN 2.0 specification.
-That means it can be both embedded in an application or run as a service. %which users can connect to through the web-based UI or remote APIs.
+That means it can be both embedded in an application or run as a service.
+%which users can connect to through the web-based UI or remote APIs.
 Besides the core engine, jBPM project also includes other components like web-based workbench which provides graphical user interface (GUI) for complex management of business processes and Eclipse tooling for modeling, testing and debugging of processes.
 \cite{jbpm6doc}
 
 \subsection{Workflow engine}
-The core jBPM engine is 
+The core jBPM engine provides a simple API to control the execution of business processes.
+To start working with processes it is first necessary to create a knowledge base which contains a reference to all the relevant process definitions.
+These definitions can be placed at various locations like classpath or file system.
+After a knowledge base is initialized and all the necessary process definitions are loaded a session can be created.
+This session is called KieSession\footnotemark\footnotetext{KIE stands for Knowledge Is Everything.} and is used to communicate with the workflow engine.
+For example, it allows users to start new process instances or manipulate with the running ones.
+However, it does not provide any methods to work with human tasks.
+For this purpose there is another component called Task Service which needs to be attached to a particular session.
 
-components hierarchy
-persistence
-CDI, REST, JMS
+The creation of knowledge bases and sessions can be simplified using the Runtime Manager.
+This component is used to deliver instances of Runtime Engine which encapsulates KieSession and Task Service.
+It allows developers to configure a strategy that is used during the actual runtime execution.
+There are three strategies available in jBPM 6 -- singleton strategy, per request strategy and per process instance strategy.
+Using the singleton strategy Runtime Manager maintains only a single instance of Runtime Engine.
+On the other hand, per request strategy instructs the Runtime Manager to provide a new instance of Runtime Engine for every request.
+This is especially suitable when a high load on the engine is expected as the requests can be proccessed in parallel.
+The last one, per process instance strategy, uses one-to-one mapping between sessions and process instances.
+It means that the same session is used every time when working with a single process instance.
+
+The jBPM engine supports logical multi-threading.
+For example, when a running process reaches a parallel gateway the execution is divided between two logical threads.
+However, this logical multi-threading is implemented using only one real thread.
+It means that the engine executes actions in serial, one after another.
+
+%components hierarchy, persistence, CDI, REST, JMS
 
 \section{jBPM Console}
 The jBPM Console is a web-based tool built on the top of the jBPM services.
@@ -213,14 +234,15 @@ Maven\footnotemark\footnotetext{Maven is a software project management tool -- \
 Within these projects several types of new files can be created from which the most important are business process definitions in BPMN 2.0 format and task as well as process forms.
 Processes can be edited in their graphical representation by the Designer.
 This editor allows users to easily model business processes using the drag\&drop.
-After the editing is done a project can be build and deployed so the individual processes within it become ready to run.
+After the editing is done a project can be built and deployed so the individual processes within it become ready to be started.
 
 All deployed projects can be seen in a list which is a part of the Deploy perspective.
 Users are able to undeploy these projects or create a new deployment unit.
 
 Processes from the deployed projects are all listed in the process definitions list which is a part of the Process Management perspective.
 For each process definition there are options to start it as a new process, view its flowchart representation or view all of its instances.
-If a process is started a user is prompted to fill in the process form which consists of some input fields. %if there are any defined.
+If a process is started a user is prompted to fill in the process form which consists of some input fields.
+%if there are any defined.
 These inputs can be for example used to initialize process variables.
 All process instances are listed in the process instance list where they can be easily controlled.
 A running process can be aborted or a signal can be sent to it by a user.
@@ -234,7 +256,9 @@ Several actions can be executed on these tasks like claiming the ones that nobod
 
 From all the perspectives mentioned above the Process Management and Tasks are the only one that will be included in the mobile version.
 
-\subsection{Remote access}
+%\subsection{Remote access}
+
+%\subsection{Backend}
 
 
 \chapter{Analysis and design}
