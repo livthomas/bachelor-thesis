@@ -2,7 +2,7 @@
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[backend=biber]{biblatex}
+\usepackage[backend=biber,sorting=none]{biblatex}
 \addbibresource{bibliography.bib}
 \usepackage[plainpages=false,pdfpagelabels,unicode]{hyperref}
 \usepackage[final]{graphicx}
@@ -91,7 +91,7 @@ To better understand the differences between these approaches, they can be divid
 \centering
 \includegraphics[width=\textwidth]{images/native-html5-hybrid.png}
 \caption{Visualization of differences between various approaches to mobile applications development, taken from \cite{developerforce}}
-\label{overflow}
+\label{fig:native-html5-hybrid}
 \end{figure}
 
 \section{Native applications}
@@ -197,47 +197,50 @@ A process model is stored as an Extensible Markup Language (XML) file which besi
 \centering
 \includegraphics[width=\textwidth]{images/process-example.png}
 \caption{Simple example of a business process in BPMN 2.0}
-\label{overflow}
+\label{fig:process-example}
 \end{figure}
 
 \section{jBPM}
 jBPM is an open-source BPM suite developed by the JBoss community.
 It can be used to easily model, execute and monitor business processes throughout their life cycle.
 The core of jBPM is a light-weight workflow engine that allows users to execute business processes described using the BPMN 2.0 specification.
-That means it can be both embedded in an application or run as a service.
-%which users can connect to through the web-based UI or remote APIs.
-Besides the core engine, jBPM project also includes other components like web-based workbench which provides graphical user interface (GUI) for complex management of business processes and Eclipse tooling for modeling, testing and debugging of processes.
-\cite{jbpm6doc}
+It can be both embedded in an application or run as a service which users can make use of through the remote APIs.
+Besides the core engine, jBPM project also includes other components like a web-based workbench which provides graphical user interface (GUI) for complex management of business processes and Eclipse\footnotemark\footnotetext{\url{https://www.eclipse.org/}} tooling for modeling, testing and debugging of processes.
+\cite{jbpm6overview}
 
 \subsection{Core Engine}
-The core jBPM engine provides a simple API to control the execution of business processes.
-To start working with processes it is first necessary to create a knowledge base which contains a reference to all the relevant process definitions.
-These definitions can be placed at various locations like classpath or file system.
-After a knowledge base is initialized and all the necessary process definitions are loaded a session can be created.
-This session is called KieSession\footnotemark\footnotetext{KIE stands for Knowledge Is Everything.} and is used to communicate with the workflow engine.
-For example, it allows users to start new process instances or manipulate with the running ones.
-However, it does not provide any methods to work with human tasks.
-For this purpose there is another component called Task Service which needs to be attached to a particular session.
+The core jBPM engine provides a simple KIE\footnotemark\footnotetext{KIE stands for Knowledge Is Everything.} API \cite{jbpm6api} to control the execution of business processes.
+To start working with processes it is first necessary to set up a runtime environment.
+The most important thing a user has to specify is a list of process definition files.
+After that a runtime manager, which is resposible for delivering instances of the runtime engine, can be created.
 
-The creation of knowledge bases and sessions can be simplified using the Runtime Manager.
-This component is used to deliver instances of Runtime Engine which encapsulates KieSession and Task Service.
-It allows developers to configure a strategy that is used during the actual runtime execution.
-There are three strategies available in jBPM 6 -- singleton strategy, per request strategy and per process instance strategy.
+%These definitions can be placed at various locations like classpath or file system.
+%After a knowledge base is initialized and all the necessary process definitions are loaded a session can be created.
+%This session is called KieSession\footnotemark\footnotetext{KIE stands for Knowledge Is Everything.} and is used to communicate with the workflow engine.
+%For example, it allows users to start new process instances or manipulate with the running ones.
+%However, it does not provide any methods to work with human tasks.
+%For this purpose there is another component called Task Service which needs to be attached to a particular session.
+
+%The creation of knowledge bases and sessions can be simplified using the Runtime Manager.
+%This component is used to deliver instances of Runtime Engine which encapsulates KieSession and Task Service.
+%It allows developers to configure a strategy that is used during the actual runtime execution.
+%There are three strategies available in jBPM 6 -- singleton strategy, per request strategy and per process instance strategy.
+\cite{jbpm6engine}
 
 \subsection{Human Task Service}
 The Human Task Service (or simply Task Service) is a special part of the engine responsible for human task management.
 A human task (or user task) is an activity type from BPMN 2.0 specification which needs to be executed by human actor.
-Human tasks are used to signalize that users are working on something outside of the system or just get inputs from them.
+Human tasks are used to signalize that users are working on something outside of the system or just to get inputs from them.
 Every task is assigned to a specific actor or a group of actors who can claim it and start working on it.
 The human task itself has its own life cycle which consists of several states.
-The simplified version containg only states relevant to the use cases in jBPM Console is visualized in the figure~\ref{task-lifecycle}.
-For a more complex description including all possible states and transitions between them see the jBPM Documentation \cite{jbpm6tasklife} or WS-HumanTask specification.
+The simplified version containing only states relevant to the use cases in jBPM Console is visualized in the figure~\ref{fig:task-lifecycle}.
+For a more complex description including all possible states and transitions between them see the jBPM Documentation \cite{jbpm6tasklife} or WS-HumanTask Specification \cite{ws-humantask}.
 
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=\textwidth]{images/task-lifecycle.png}
 \caption{Simplified version of a human task life cycle}
-\label{task-lifecycle}
+\label{fig:task-lifecycle}
 \end{figure}
 
 %The Task Service provides a simple API 
@@ -251,7 +254,7 @@ All this projects grouped together form one unified environment for assets manag
 \centering
 \includegraphics[width=\textwidth]{images/jbpm-console.png}
 \caption{Process designer in jBPM Console}
-\label{overflow}
+\label{fig:jbpm-console}
 \end{figure}
 
 \subsection{Graphical user interface}
