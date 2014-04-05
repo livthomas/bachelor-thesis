@@ -4,7 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[backend=biber,sorting=none]{biblatex}
 \addbibresource{bibliography.bib}
-\usepackage[plainpages=false,pdfpagelabels,unicode]{hyperref}
+\usepackage[plainpages=false,pdfpagelabels,unicode,hidelinks]{hyperref}
 \usepackage[final]{graphicx}
 \thesistitle{Mobile Access to jBPM Console}
 \thesissubtitle{Bachelor thesis}
@@ -137,11 +137,10 @@ When designing a mobile web application it is often created as a subset of the f
 In such cases there is usually an intension to somehow connect these two versions to support uniformity and avoid code duplicates.
 Nowadays there are basically two ways how to integrate them to one final solution.
 
-\subsection{Responsive design}
+\subsection{Responsive web design}
 Responsive web design is a technique for developing web applications optimized for different types of devices.
-It uses mostly CSS but also JavaScript to adapt the page content to the actual size of the browser's window.
+It uses mostly CSS but also JavaScript to adapt the page content to the actual size of the browser's window. \cite{marcotte11}
 This technique is suitable when developing a mobile version side-by-side with the full web application.
-\cite{marcotte11}
 
 \subsection{Adaptive delivery}
 Adaptive delivery is very similar to the responsive web design.
@@ -209,26 +208,18 @@ Besides the core engine, jBPM project also includes other components like a web-
 \cite{jbpm6overview}
 
 \subsection{Core Engine}
-The core jBPM engine provides a simple KIE\footnotemark\footnotetext{KIE stands for Knowledge Is Everything.} API \cite{jbpm6api} to control the execution of business processes.
-To start working with processes it is first necessary to set up a runtime environment.
-The most important thing a user has to specify is a list of process definition files.
-After that a runtime manager, which is resposible for delivering instances of the runtime engine, can be created.
-
-%These definitions can be placed at various locations like classpath or file system.
-%After a knowledge base is initialized and all the necessary process definitions are loaded a session can be created.
-%This session is called KieSession\footnotemark\footnotetext{KIE stands for Knowledge Is Everything.} and is used to communicate with the workflow engine.
-%For example, it allows users to start new process instances or manipulate with the running ones.
-%However, it does not provide any methods to work with human tasks.
-%For this purpose there is another component called Task Service which needs to be attached to a particular session.
-
-%The creation of knowledge bases and sessions can be simplified using the Runtime Manager.
-%This component is used to deliver instances of Runtime Engine which encapsulates KieSession and Task Service.
-%It allows developers to configure a strategy that is used during the actual runtime execution.
-%There are three strategies available in jBPM 6 -- singleton strategy, per request strategy and per process instance strategy.
+The core jBPM engine provides KIE\footnotemark\footnotetext{KIE stands for Knowledge Is Everything.} API \cite{jbpm6api} to control the execution of business processes.
+To start working with processes it is first necessary to set up Runtime Environment.
+The most important thing here that needs to be specified is a list of process definition files.
+These definitions are parsed and stored in a form which allows fast automated execution.
+After that Runtime Manager, which is resposible for delivering instances of Runtime Engine, can be created.
+Runtime Engine encapsulates the two most important elements of the jBPM engine -- KIE Session and Task Service.
+KIE Session provides an interface to communicate with the engine.
+It allows users to start new processes, manipulate with the running ones or get some information about those that has already finished.
 \cite{jbpm6engine}
 
-\subsection{Human Task Service}
-The Human Task Service (or simply Task Service) is a special part of the engine responsible for human task management.
+\subsection{Task Service}
+The Task Service is a special part of the engine responsible for human task management.
 A human task (or user task) is an activity type from BPMN 2.0 specification which needs to be executed by human actor.
 Human tasks are used to signalize that users are working on something outside of the system or just to get inputs from them.
 Every task is assigned to a specific actor or a group of actors who can claim it and start working on it.
@@ -243,7 +234,11 @@ For a more complex description including all possible states and transitions bet
 \label{fig:task-lifecycle}
 \end{figure}
 
-%The Task Service provides a simple API 
+The Task Service provides a simple API that allows users to handle human tasks.
+Using this API tasks can be claimed, started and completed by a user or delegated to someone else.
+While completing a task users are able to pass some parameters.
+These can be further processed or mapped directly to the process variables.
+This is how the interaction between a user and a process instance is ensured and how user actions can influence the following steps in the process execution.
 
 \section{jBPM Console}
 The jBPM Console is a web-based tool built on the top of the jBPM services.
