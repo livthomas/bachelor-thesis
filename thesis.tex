@@ -252,7 +252,7 @@ All this projects grouped together form one unified environment for assets manag
 \label{fig:jbpm-console}
 \end{figure}
 
-\subsection{Graphical user interface}
+\subsection{Graphical User Interface}
 The GUI of the jBPM Console consists of several perspectives.
 Each one of them represents one step in the process life cycle.
 
@@ -286,9 +286,13 @@ Several actions can be executed on these tasks like claiming the ones that nobod
 
 From all the perspectives mentioned above the Process Management and Tasks are the only one that will be included in the mobile version.
 
-\subsection{Under the hood}
+\subsection{Modular approach}
 
-jBPM Console is a modular application.
+From the developer's point of view jBPM Console is a modular application.
+Easily said almost every perspective is one independent module.
+This approach allows developers to combine modules from different projects and create new applications based on current needs without code duplication.
+A typical example is KIE Workbench which is basically jBPM Console merged with Drools Workbench.
+The result is a complex application for business and rules management with some additional functionality like remote access to its services.
 
 %\subsection{Remote access}
 
@@ -299,8 +303,28 @@ Then some previous solutions for implementing a mobile version of this applicati
 Finally, a solution is drafted which is considered to be the most appropriate according to the previous findings.
 
 \section{Possible options}
-There are many various options how a mobile version of the jBPM Console can be implemented.
+There are basically two options how a mobile version of the jBPM Console can be implemented.
+Both solutions assume that there is an instance of the jBPM Console or KIE Workbench running on the server and the main difference between them is the way how mobile devices communicate with it.
 
+\subsection{Native applications}
+The biggest advantage of native applications is the fact that they run directly on mobile devices and thus their performance is very high and they are also able to use special hardware components.
+However, a mobile version of jBPM Console does not need to use any hardware-specific functions or perform complicated computations.
+%The only thing it needs to do is to react to users' actions by calling the appropriate operations using jBPM services.
+The only thing it needs to do is to use the jBPM services to call the appropriate operations as a reaction to users' actions.
+While native applications run completely on mobile devices they cannot use these services directly but need to access them remotely.
+The solution is to use the REST\footnotemark\footnotetext{Representational state transfer (REST) is an architectural style which uses HTTP commands to execute different actions on resources provided by the server. \cite{fielding20}} API provided by KIE Workbench to communicate with the jBPM engine.
+Using this interface application can work with processes and human tasks even though there is no instance of jBPM engine running locally on the mobile device.
+
+The most significant drawback of this solution is quite difficult maintenance.
+When a new feature is added to the jBPM Console the REST API needs to be updated together with all platform-specific clients.
+This requires a lot of time and effort to both implement the changes and test all client applications.
+
+This solution also represents the hybrid applications as the result is practically the same.
+They still run directly on mobile devices and thus have to communicate with the KIE Workbench through the REST interface.
+The only difference is that there is no need to write a new application for each platform so the maintenance is a little bit easier.
+
+\subsection{Web application}
+A web application on the other hand can run on the same server as the jBPM Console.
 
 \section{Previous approaches}
 Android + iPhone apps previously developed
