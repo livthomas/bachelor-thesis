@@ -297,7 +297,7 @@ The result is a complex application for business and rules management with some 
 %\subsection{Remote access}
 
 
-\chapter{Analysis and design}
+\chapter{Analysis}
 To be able to design the right solution for the mobile version of the jBPM Console it is essential to compare pros and cons of different approaches to mobile applications development (described in chapter~\ref{chap:chapter2}) with the requirements of the application being developed.
 Then some previous solutions for implementing a mobile version of this application are mentioned and their weaknesses are discovered.
 Finally, a solution is drafted which is considered to be the most appropriate according to the previous findings.
@@ -306,41 +306,86 @@ Finally, a solution is drafted which is considered to be the most appropriate ac
 There are basically two options how a mobile version of the jBPM Console can be implemented.
 Both solutions assume that there is an instance of the jBPM Console or KIE Workbench running on the server and the main difference between them is the way how mobile devices communicate with it.
 
-\subsection{Native applications}
-The biggest advantage of native applications is the fact that they run directly on mobile devices and thus their performance is very high and they are also able to use special hardware components.
-However, a mobile version of jBPM Console does not need to use any hardware-specific functions or perform complicated computations.
+\subsection{Native and hybrid applications}
+%The biggest advantage of native applications is the fact that they run directly on mobile devices and thus their performance is very high and they are also able to use special hardware components.
+%However, a mobile version of jBPM Console does not need to use any hardware-specific functions or perform complicated computations.
 %The only thing it needs to do is to react to users' actions by calling the appropriate operations using jBPM services.
-The only thing it needs to do is to use the jBPM services to call the appropriate operations as a reaction to users' actions.
-While native applications run completely on mobile devices they cannot use these services directly but need to access them remotely.
-The solution is to use the REST\footnotemark\footnotetext{Representational state transfer (REST) is an architectural style which uses HTTP commands to execute different actions on resources provided by the server. \cite{fielding20}} API provided by KIE Workbench to communicate with the jBPM engine.
-Using this interface application can work with processes and human tasks even though there is no instance of jBPM engine running locally on the mobile device.
+%The only thing it needs to do is to use the jBPM services to call the appropriate operations as a reaction to users' actions.
+%While native applications run completely on mobile devices they cannot use these services directly but need to access them remotely.
+%The solution is to use the REST\footnotemark\footnotetext{Representational state transfer (REST) is an architectural style which uses HTTP commands to execute different actions on resources provided by the server. \cite{fielding20}} API provided by KIE Workbench to communicate with the jBPM engine.
+%Using this interface application can work with processes and human tasks even though there is no instance of jBPM engine running locally on the mobile device.
 
-The most significant drawback of this solution is quite difficult maintenance.
-When a new feature is added to the jBPM Console the REST API needs to be updated together with all platform-specific clients.
-This requires a lot of time and effort to both implement the changes and test all client applications.
+%The most significant drawback of this solution is quite difficult maintenance.
+%When a new feature is added to the jBPM Console the REST API needs to be updated together with all platform-specific clients.
+%This requires a lot of time and effort to both implement the changes and test all client applications.
 
-This solution also represents the hybrid applications as the result is practically the same.
-They still run directly on mobile devices and thus have to communicate with the KIE Workbench through the REST interface.
-The only difference is that there is no need to write a new application for each platform so the maintenance is a little bit easier.
+%This solution also represents the hybrid applications as the result is practically the same.
+%They still run directly on mobile devices and thus have to communicate with the KIE Workbench through the REST interface.
+%The only difference is that there is no need to write a new application for each platform so the maintenance is a little bit easier.
+
+Although native and hybrid applications are two slightly different approaches to mobile application development in this context there is almost no difference between them.
+What is relevant for designing a mobile version of jBPM Console is the environment in which it will run.
+Both types of applications run directly on mobile devices.
+The only difference is in the development process.
+While native applications need to be developed separately for each platform there is only one common code of a hybrid application which is then compiled for each platform.
+
+While these applications run directly on mobile devices there is a need to communicate with KIE Workbench remotely.
+This can be achieved by using the REST\footnotemark\footnotetext{Representational state transfer (REST) is an architectural style which uses HTTP commands to execute different actions on resources provided by the server. \cite{fielding20}} API it provides.
+Using this interface a client application can execute all common operations with processes or human tasks.
+There is practically no difference between executing them through the web GUI of the jBPM Console or using REST calls as the same backend services are called in both cases.
+
+However, this solution has some serious drawbacks.
+Not everything can be executed using the REST API.
+If there is a need to perform some more complicated commands this interface will have to be extended.
+Also every change to the API urges developers to modify all platform-specific clients.
 
 \subsection{Web application}
-A web application on the other hand can run on the same server as the jBPM Console.
+The jBPM Console itself is a web application.
+That means if a mobile version is also a web application it might be directly a part of the jBPM Console.
+The maintenance of such solution will be much easier than managing several platform-specific clients.
+There is also no problem with the limited interface as in this case the mobile version will have access to the same resources as the original application.
+This solution can be also divided into two slightly different approaches.
 
-\section{Previous approaches}
+Responsive web design is the first one.
+This approach would require completely refactor all existing pages and change their layout to follow the rules of responsiveness.
+In such a big application as jBPM Console this will be a very complicated process requiring a lot of effort and with uncertain result.
+In addition, not all the parts of the original application are suitable for mobile devices.
+Actions performed on some of them might be quite unpractical to do on these devices.
+
+On the other side, adaptive delivery is an approach when the detection is performed on the server side.
+This allows to create completely different screens for mobile and desktop users.
+jBPM Console is implemented using the Model–view–presenter (MVP) pattern so there is an option to add new implementations of view interfaces optimized especially for mobile devices.
+
+\section{Previous attempt}
 Android + iPhone apps previously developed
 \cite{petovsky13}
 
 \section{Suggested solution}
 
-\section{Architecture}
+%\section{Architecture draft}
 
-\chapter{Implementation}
+\chapter{Design and implementation}
+
+\section{Design patterns}
+
+\subsection{MVP}
+
 \section{Technologies}
 
-\subsection{Mobile GWT}
+\subsection{GWT}
+Google Web Toolkit (GWT)
+
+\subsection{MGWT}
 
 \subsection{Errai}
 %CDI
+
+\subsection{UberFire}
+
+\section{Application architecture}
+
+\section{Actual implementation}
+
 
 %\section{Architecture}
 
