@@ -357,8 +357,20 @@ This allows to create completely different screens for mobile and desktop users.
 jBPM Console is implemented using the Model–view–presenter (MVP) pattern so there is an option to add new implementations of view interfaces optimized especially for mobile devices.
 
 \section{Previous attempt}
-Android + iPhone apps previously developed
-\cite{petovsky13}
+Last year there was an attempt to implement a mobile version of jBPM Console. \cite{petovsky13}
+At that time the jBPM 6 was just being developed and no stable build of that version had been released so the author decided to use more reliable jBPM 5.
+He chose to implement his solution as a native application for Android devices.
+
+This application only allows users to manage processes.
+There is a process definitions list where all processes from deployed projects can be found.
+A user can choose one of them and start a new instance.
+For each process definition there is a list of all running instances.
+An instance can be either terminated or there is an option to show the BPMN diagram where the current position of process execution is marked.
+
+The opponent of this thesis mentioned some drawbacks of the resulting product in his report.
+There was a question why the author developed the solution for only one specific platform.
+The opponent suggested it would be more appropriate to create a web application which could be used on a wide range of different devices.
+Also a lack of automated testing was reproached in the report.
 
 \section{Suggested solution}
 
