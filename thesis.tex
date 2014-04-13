@@ -26,7 +26,12 @@
 \end{ThesisDeclaration}
 
 \begin{ThesisThanks}
-I would like to thank my supervisor... + Jiří Sviták, Mauricio Salatino
+Foremost, I would like to express my gratitude to my technical supervisor Ing. Jiří Sviták for his guidance, valuable comments and time invested in consultations throughout the work.
+
+I would also like to thank my advisor RNDr. Adam Rambousek for helping me with all formal aspects of academic writing.
+
+Another big thanks belongs to the jBPM community, especially to the jBPM core developer Ing. Mauricio Salatino who introduced me to the jBPM Console project and helped me a lot with integrating my work into it.
+Without him I would never be able to successfully finish the practical part of my thesis.
 \end{ThesisThanks}
 
 \begin{ThesisAbstract}
@@ -34,7 +39,7 @@ The aim of the bachelor work is to provide...
 \end{ThesisAbstract}
 
 \begin{ThesisKeyWords}
-business process, JBoss, jBPM, jBPM Console, mgwt, mobile application, mobile web
+business process, JBoss, jBPM, jBPM Console, KIE Workbench, mgwt, mobile application, mobile web
 \end{ThesisKeyWords}
 
 \tableofcontents
@@ -383,7 +388,7 @@ The architecture is described both in written form and using diagrams from the U
 The basic use cases are mentioned in the thesis assignment.
 According to it the application should provide the functionality to manipulate with process runtime and human tasks.
 Going more into the detail, users will be able to see the list of available process definitions and for each one of them start a new instance.
-They may also list all running process instances and abort any of them.
+They may list all running process instances and abort any of them as well.
 The application also allows users to show their tasks, create a new one, claim available group tasks, release them, start working on a task, complete it or delegate it to someone else.
 
 \begin{figure}[ht!]
@@ -429,10 +434,6 @@ Although a mobile version of the jBPM Console as described in this thesis is not
 While model–view–presenter (MVP) is one of the most popular design patterns for web applications it was decided to adopt it.
 This pattern is also used in the original application and fits the best with the used technologies. \cite{ramsdale10}
 
-The class diagram (figure~\ref{fig:class-diagram}) is very similar to the visualization of navigation between screens.
-When following the MVP design pattern there needs to be a single presenter and the corresponding view for each screen.
-All view classes have one common ancestor which defines the uniform look for them.
-
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=\textwidth]{images/class-diagram.pdf}
@@ -440,26 +441,51 @@ All view classes have one common ancestor which defines the uniform look for the
 \label{fig:class-diagram}
 \end{figure}
 
-\subsection{Modularization}
+The class diagram (figure~\ref{fig:class-diagram}) is very similar to the visualization of navigation between screens.
+When following the MVP design pattern there needs to be a single presenter and the corresponding view for each screen.
+All view classes have one common ancestor which defines the uniform look for them.
+
+%\subsection{Modularization}
 
 \chapter{Implementation}
+So far the application architecture was only described on the abstract level.
+While this kind of view is very important it is also essential to know something about the actual implementation.
+This chapter introduces the used technologies, describes the most serious problems that occured during the implementation phase and provides some code samples from the interesting parts of the application.
 
 \section{Technologies}
+This section provides a quick overview of used technologies.
+Each of them is briefly introduced and then the explanation why it was decided to use it is given.
 
-\subsection{GWT}
-Google Web Toolkit (GWT)
+\subsection{Google Web Toolkit}
+Google Web Toolkit (GWT) is a development toolkit for building and optimizing complex browser-based applications.
+The biggest difference in comparison with other tools is the fact that using GWT developers write their code in Java and it is then compiled to JavaScript.
+This brings some benefits when creating large applications as there are lots of advanced tools for development in Java and the language itself compared with JavaScript has some useful features like strong static type-checking and object-oriented design.
 
-\subsection{MGWT}
+It was decided to use GWT because the jBPM Console is based on it and there was a demand to reuse as many components as possible.
+To achieve that it is helpful to build the mobile version using the same technologies as the original application.
+
+\subsection{Mobile GWT}
+Mobile GWT (MGWT) extends GWT functionality by adding new features which make it easier to develop web applications optimized for mobile devices.
+It adds support for touch events, animations and lots of mobile widgets with platform-specific look-and-feel.
+
+There are also other projects with similar capabilities, for example jQuery Mobile wrapper for GWT\footnotemark\footnotetext{\url{https://github.com/jqm4gwt/jqm4gwt}} (jqm4gwt).
+But it was decided to use the MGWT despite the fact that jqm4gwt provides richer pallete of widgets.
+The main reason is because the leading developer of MGWT has become a member of the GWT Steering Committee and there are intensions to add support for mobile devices to the next major release of GWT. \cite{gwtroadmap}
+This means that GWT 3.0 will probably introduce a new widgets very similar to those from MGWT and so it should be quite easy to switch to it.
 
 \subsection{Errai Framework}
+Errai is a GWT-based framework for building rich web applications. \cite{erraidoc}
 %CDI
 
 \subsection{UberFire}
+UberFire is
 
-\section{Implementation details}
+%\section{Implementation details}
 
+\section{Problems}
+\subsection{Place manager}
 
-%\section{Architecture}
+\section{Code samples}
 
 \chapter{Testing}
 \section{Manual testing}
