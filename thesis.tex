@@ -4,8 +4,9 @@
 \usepackage[T1]{fontenc}
 \usepackage[backend=biber,sorting=none]{biblatex}
 \addbibresource{bibliography.bib}
-\usepackage[plainpages=false,pdfpagelabels,unicode,hidelinks]{hyperref}
+\usepackage[plainpages=false,pdfpagelabels,unicode]{hyperref} %hidelinks
 \usepackage[final]{graphicx}
+\usepackage{svg}
 \thesistitle{Mobile Access to jBPM Console}
 \thesissubtitle{Bachelor thesis}
 \thesisstudent{Tomáš Livora}
@@ -297,7 +298,7 @@ The result is a complex application for business and rules management with some 
 %\subsection{Remote access}
 
 
-\chapter{Analysis}
+\chapter{Analysis and design}
 To be able to design the right solution for the mobile version of the jBPM Console it is essential to compare pros and cons of different approaches to mobile applications development (described in chapter~\ref{chap:chapter2}) with the requirements of the application being developed.
 Then some previous solutions for implementing a mobile version of this application are mentioned and their weaknesses are discovered.
 Finally, a solution is drafted which is considered to be the most appropriate according to the previous findings.
@@ -370,17 +371,78 @@ The other thing that favors the web approach is the fact that the original appli
 
 However, the process of extending this application is not that easy as it seems to be.
 Implementing just new views optimized for mobile devices (as described in section~\ref{sec:webapp}) would probably not be enough.
-jBPM Console use a lot of various panels all over the screen.
-These panels often provides some basic functionality and thus cannot be ommited.
-In the mobile version there is a need to create a new page for each panel.
+jBPM Console is intended to be used on high-definition wide screens and consists of many various panels all over the screen.
+These panels often provides some fundamental functions and thus cannot be ommited.
+In the mobile version a new page for each of these panels must be created.
 
-%\section{Architecture draft}
+\section{Application architecture}
+This section describes more details about the application being developed.
+The architecture is described both in written form and using diagrams from the Unified Modeling Language (UML).
 
-\chapter{Design and implementation}
+\subsection{Use cases}
+The basic use cases are mentioned in the thesis assignment.
+According to it the application should provide the functionality to manipulate with process runtime and human tasks.
+Going more into the detail, users will be able to see the list of available process definitions and for each one of them start a new instance.
+They may also list all running process instances and abort any of them.
+The application also allows users to show their tasks, create a new one, claim available group tasks, release them, start working on a task, complete it or delegate it to someone else.
 
-\section{Design patterns}
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=\textwidth]{images/use-case.pdf}
+\caption{Use case diagram}
+\label{fig:use-case}
+\end{figure}
 
-\subsection{MVP}
+The roles used in the use case diagram (figure~\ref{fig:use-case}) are the only two out of five user roles available in the jBPM Console which have the right to work with process runtime and human tasks. \cite{jbpm6roles}
+
+\subsection{Screens and navigation}
+Considering all use cases mentioned above, the application GUI can be divided into three sections - process definitions, process instances and human tasks.
+Home screen is an entry point to all these sections.
+The visualization of all screens and the navigation between them can be found in figure~\ref{fig:screens}.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=\textwidth]{images/screens.pdf}
+\caption{Navigation between screens}
+\label{fig:screens}
+\end{figure}
+
+Process definitions screen contains a simple list of all available business processes.
+In comparison with the original jBPM Console, the items of this list only display the name and version of the process.
+When selecting one of them users will get to the screen where more detailed information about the process can be found.
+This screen also allows users to start a new instance of the selected business process.
+
+Process instances screen contains a list of all running processes.
+For each of them the ID and name of the process is only displayed.
+More information about the process instance can be found on the details screen.
+
+The third part, human tasks section, consists of three screens -- tasks list, task details and new task.
+On the tasks list screen there is a list of all tasks which the currently logged-in user is a potential owner of\footnotemark\footnotetext{In this context a user is a potential owner of the given task when he is explicitly listed as the actor of that task or when he belongs to a group of users which is the task assigned to.}.
+The items of this list only contain the ID and name of the task.
+All other information can be found on the task details screen where some of the parameters can be changed as well.
+This screen also allows users to claim, start, release or complete the task.
+The delegation of the task to someone else is possible here, too.
+
+\subsection{Class hierarchy}
+When designing class hierarchy of any large scale application it is a good practise to follow a design pattern.
+Although a mobile version of the jBPM Console as described in this thesis is not that big, the further development must be taken into account and so it is essential to design it in accordance with some pattern.
+While model–view–presenter (MVP) is one of the most popular design patterns for web applications it was decided to adopt it.
+This pattern is also used in the original application and fits the best with the used technologies. \cite{ramsdale10}
+
+The class diagram (figure~\ref{fig:class-diagram}) is very similar to the visualization of navigation between screens.
+When following the MVP design pattern there needs to be a single presenter and the corresponding view for each screen.
+All view classes have one common ancestor which defines the uniform look for them.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=\textwidth]{images/class-diagram.pdf}
+\caption{Class diagram}
+\label{fig:class-diagram}
+\end{figure}
+
+\subsection{Modularization}
+
+\chapter{Implementation}
 
 \section{Technologies}
 
@@ -389,21 +451,21 @@ Google Web Toolkit (GWT)
 
 \subsection{MGWT}
 
-\subsection{Errai}
+\subsection{Errai Framework}
 %CDI
 
 \subsection{UberFire}
 
-\section{Application architecture}
-
-\section{Actual implementation}
+\section{Implementation details}
 
 
 %\section{Architecture}
 
 \chapter{Testing}
+\section{Manual testing}
 \section{Automated functional testing}
-\section{Selendroid}
+\subsection{Selendroid}
+\subsection{Test suite}
 
 \chapter{Summary}
 
