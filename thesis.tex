@@ -6,7 +6,6 @@
 \addbibresource{bibliography.bib}
 \usepackage[plainpages=false,pdfpagelabels,unicode]{hyperref} %hidelinks
 \usepackage[final]{graphicx}
-\usepackage{svg}
 \thesistitle{Mobile Access to jBPM Console}
 \thesissubtitle{Bachelor thesis}
 \thesisstudent{Tomáš Livora}
@@ -263,10 +262,10 @@ The GUI of the jBPM Console consists of several perspectives.
 Each one of them represents one step in the process life cycle.
 
 Authoring perspective is based on the Guvnor component and allows users to manage business assets.
-Individual files are stored in a virtual file system (VFS) based on Git\footnotemark\footnotetext{Git is a distributed version control system -- \url{http://git-scm.com/}} repositories.
+Individual files are stored in Git\footnotemark\footnotetext{Git is a distributed version control system. \url{http://git-scm.com/}} repositories on which a virtual file system (VFS) is based.
 %These repositories are organized into bigger structures called organizational units.
 Users can create a new repositories or clone the remote ones.
-Maven\footnotemark\footnotetext{Maven is a software project management tool -- \url{http://maven.apache.org/}} projects are created inside these repositories to simplify organization of the files.
+Maven\footnotemark\footnotetext{Maven is a software project management tool. \url{http://maven.apache.org/}} projects are created inside these repositories to simplify organization of the files.
 Within these projects several types of new files can be created from which the most important are business process definitions in BPMN 2.0 format and task as well as process forms.
 Processes can be edited in their graphical representation by the Designer.
 This editor allows users to easily model business processes using the drag\&drop.
@@ -279,7 +278,7 @@ Processes from the deployed projects are all listed in the process definitions l
 For each process definition there are options to start it as a new process, view its flowchart representation or view all of its instances.
 If a process is started a user is prompted to fill in the process form which consists of some input fields.
 %if there are any defined.
-These inputs can be for example used to initialize process variables.
+These inputs are used to initialize process variables.
 All process instances are listed in the process instance list where they can be easily controlled.
 A running process can be aborted or a signal can be sent to it by a user.
 The history of the process variables can also be viewed here.
@@ -322,7 +321,7 @@ While native applications need to be developed separately for each platform ther
 While these applications run directly on mobile devices there is a need to communicate with KIE Workbench remotely.
 This can be achieved by using the REST\footnotemark\footnotetext{Representational state transfer (REST) is an architectural style which uses HTTP commands to execute different actions on resources provided by the server. \cite{fielding20}} API it provides.
 Using this interface a client application can execute all common operations with processes or human tasks.
-There is practically no difference between executing them through the web GUI of the jBPM Console or using REST calls as the same backend services are called in both cases.
+There is practically no difference between executing them via the web GUI of the jBPM Console or using REST calls as the same backend services are called in both cases.
 
 However, this solution has some serious drawbacks.
 Not everything can be executed using the REST API.
@@ -370,7 +369,7 @@ The integration with the original application should be as close as possible.
 And the effort needed to develop such solution should also be taken into account.
 
 Considering all these factors together with pros and cons of previously mentioned approaches a mobile web application seems to be the right solution.
-Native applications do not offer any advantages over the web ones.
+Native applications do not offer any advantages over the web ones in the context of jBPM Console.
 They have rather some disadvantages mentioned above.
 The other thing that favors the web approach is the fact that the original application is also web-based so it just needs to be extended.
 
@@ -382,14 +381,17 @@ In the mobile version a new page for each of these panels must be created.
 
 \section{Application architecture}
 This section describes more details about the application being developed.
-The architecture is described both in written form and using diagrams from the Unified Modeling Language (UML).
+The architecture is described both in written form and using the Unified Modeling Language (UML) diagrams.
 
 \subsection{Use cases}
-The basic use cases are mentioned in the thesis assignment.
-According to it the application should provide the functionality to manipulate with process runtime and human tasks.
+The application should provide the functionality to manipulate with process runtime and human tasks.
 Going more into the detail, users will be able to see the list of available process definitions and for each one of them start a new instance.
 They may list all running process instances and abort any of them as well.
 The application also allows users to show their tasks, create a new one, claim available group tasks, release them, start working on a task, complete it or delegate it to someone else.
+
+These are all actions peformed by users on a daily basis.
+Other functionality of the jBPM Console is not inteded to be a part of the mobile version.
+It would be very unpractical to set up projects or design new processes on mobile devices.
 
 \begin{figure}[ht!]
 \centering
@@ -457,7 +459,7 @@ This section provides a quick overview of used technologies.
 Each of them is briefly introduced and then the explanation why it was decided to use it is given.
 
 \subsection{Google Web Toolkit}
-Google Web Toolkit (GWT) is a development toolkit for building and optimizing complex browser-based applications.
+Google Web Toolkit (GWT) is a development toolkit for building and optimizing complex browser-based applications. \cite{gwtoverview}
 The biggest difference in comparison with other tools is the fact that using GWT developers write their code in Java and it is then compiled to JavaScript.
 This brings some benefits when creating large applications as there are lots of advanced tools for development in Java and the language itself compared with JavaScript has some useful features like strong static type-checking and object-oriented design.
 
@@ -478,14 +480,20 @@ Errai is a GWT-based framework for building rich web applications. \cite{erraido
 %CDI
 
 \subsection{UberFire}
-UberFire is
+UberFire is a Rich Client Platform that builds on the strengths of GWT and Errai. \cite{uberfire}
 
-%\section{Implementation details}
+\section{Re-used components}
+\subsection{TaskServiceEntryPoint}
+\subsection{DataServiceEntryPoint}
 
 \section{Problems}
 \subsection{Place manager}
+\subsection{Integration}
+\subsection{Deployment}
 
-\section{Code samples}
+%\section{Repository}
+
+\section{Licensing}
 
 \chapter{Testing}
 \section{Manual testing}
