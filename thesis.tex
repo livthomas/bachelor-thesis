@@ -3,7 +3,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[backend=biber,sorting=none]{biblatex}
-\addbibresource{bibliography.bib}
 \usepackage[plainpages=false,pdfpagelabels,unicode]{hyperref} %hidelinks
 \usepackage[final]{graphicx}
 \thesistitle{Mobile Access to jBPM Console}
@@ -14,6 +13,8 @@
 \thesisyear{2014}
 \thesisadvisor{RNDr. Adam Rambousek}
 \thesislang{en}
+
+\addbibresource{bibliography.bib}
 
 \begin{document}
 \FrontMatter
@@ -38,7 +39,7 @@ The aim of the bachelor work is to provide...
 \end{ThesisAbstract}
 
 \begin{ThesisKeyWords}
-business process, JBoss, jBPM, jBPM Console, KIE Workbench, mgwt, mobile application, mobile web
+business process, JBoss, jBPM, jBPM Console, mobile application, mobile web
 \end{ThesisKeyWords}
 
 \tableofcontents
@@ -213,6 +214,7 @@ Besides the core engine, jBPM project also includes other components like a web-
 \cite{jbpm6overview}
 
 \subsection{Core Engine}
+\label{subsec:core-engine}
 The core jBPM engine provides KIE\footnotemark\footnotetext{KIE stands for Knowledge Is Everything.} API \cite{jbpm6api} to control the execution of business processes.
 To start working with processes it is first necessary to set up Runtime Environment.
 The most important thing here that needs to be specified is a list of process definition files.
@@ -477,14 +479,83 @@ This means that GWT 3.0 will probably introduce a new widgets very similar to th
 
 \subsection{Errai Framework}
 Errai is a GWT-based framework for building rich web applications. \cite{erraidoc}
+It provides many useful features from which the most important for this project is the client-side integration for CDI\footnotemark\footnotetext{CDI (Contexts and Dependency Injection) is the Jave EE standard (JSR-299) for handling dependency injection.} and remote procedure calls (RPC) for client-server communication.
+%CDI programming model within client code
+These two things are the main reason why it was decided to use Errai.
+There is an intention to re-use some parts of jBPM Console (described later in section~\ref{sec:reused-components}) and thanks to these features it can be done quite easily.
 %CDI
 
 \subsection{UberFire}
-UberFire is a Rich Client Platform that builds on the strengths of GWT and Errai. \cite{uberfire}
+UberFire is a rich client platform (RCP) that builds on the strengths of GWT and Errai. \cite{uberfire}
+It provides flexible layout components, VFS based on Git repositories and pluggable authentication and authorization system.
+
+The only part of the UberFire this project directly use is the identity provider.
+However, other parts are second degree dependencies as some re-used components from jBPM Console rely on them.
 
 \section{Re-used components}
-\subsection{TaskServiceEntryPoint}
+One of the main goals during the development of the mobile version of jBPM Console was to re-use as many components as possible.
+Since it was decided to use the same technologies, the mobile application is able to call the jBPM services the same way as the original application do.
+This section introduces these services, describes how exactly they are called and what is executed in the background.
+
+Basically, all re-used components from jBPM Console described below are designed the same way.
+Each of them is a wrapper for several jBPM services.
+From the architectural point of view they are all adapters so they provide interfaces different from services they call in the background.
+Going more into the detail, they transform database entities returned by jBPM services to data transfer objects (DTOs) which can be serialized and sent over the wire between server and clients.
+
+
+\label{sec:reused-components}
 \subsection{DataServiceEntryPoint}
+
+DataServiceEntryPoint is a wrapper for two jBPM services -- RuntimeDataService and BPMN2DataService.
+The first one provides methods for getting information about process definitions, process instances and their variables.
+The second one can be used to get basic information about entities, domain objects, data, forms and tasks associated with a particular business process.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=\textwidth]{images/refresh-instances.pdf}
+\caption{Refreshing the list of process instances using DataServiceEntryPoint}
+\label{fig:refresh-instances}
+\end{figure}
+
+The sequence diagram in figure~\ref{fig:refresh-instances} is showing how DataServiceEntryPoint is used in the mobile application.
+This example describes the whole process of refreshing the list of process instances.
+The components on the left are compiled to JavaScript and operate on the client side while the components on the right are run on the application server.
+The calling of getProcessInstances() method on DataServiceEntryPoint is implemented using RPC.
+
+\subsection{KieSessionEntryPoint}
+
+KieSessionEntryPoint works with two jBPM services -- DeploymentService and RuntimeDataService.
+The first one deals with deployment units which are not used in the mobile application.
+The second one was described in the previous section.
+It may seem like this component does not provide anything more than DataServiceEntryPoint.
+But in fact it does not only wrap the jBPM services but makes use of them to provide more complex functionality.
+It allows starting new process instances, aborting, suspending and signaling the running ones or changing values of process variables.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=\textwidth]{images/abort-process.pdf}
+\caption{Aborting a process instance using KieSessionEntryPoint}
+\label{fig:abort-process}
+\end{figure}
+
+The example shown in figure~\ref{fig:abort-process} explains what is performed when abortProcessInstance() method of KieSessionEntryPoint is called.
+This component works directly with RuntimeManager, RuntimeEngine and KieSession (described in section~\ref{subsec:core-engine}).
+
+\subsection{TaskServiceEntryPoint}
+
+TaskServiceEntryPoint wraps only a single jBPM service, InternalTaskService, which provides a wide range of methods for working with human tasks.
+It is also a simple adapter like DataServiceEntryPoint so it does not add any functionality and just provides remote interface for Task Service.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=\textwidth]{images/complete-task.pdf}
+\caption{Completing a task using TaskServiceEntryPoint}
+\label{fig:complete-task}
+\end{figure}
+
+
+Figure~\ref{fig:complete-task} is showing sequence of steps that are executed in order to complete a given task.
+Identity provider from UberFire is used in order to get the name of the currently logged-in.
 
 \section{Problems}
 \subsection{Place manager}
@@ -494,6 +565,8 @@ UberFire is a Rich Client Platform that builds on the strengths of GWT and Errai
 %\section{Repository}
 
 \section{Licensing}
+The project is licensed under the Apache License, Version 2.0\footnotemark\footnotetext{\url{http://www.apache.org/licenses/LICENSE-2.0}}.
+
 
 \chapter{Testing}
 \section{Manual testing}
