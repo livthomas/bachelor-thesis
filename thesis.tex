@@ -583,7 +583,8 @@ This allows modules to be independant on each other and be able to move between 
 It is also a preparation for future migration to UberFire.
 
 \subsection{Integration}
-The application was originally developed in jbpm-mobile\footnotemark\footnotetext{\url{https://github.com/Salaboy/jbpm-mobile}} repository which belongs to one of the jBPM core developers, Mauricio Salatino.
+\label{subsec:integration}
+The application was originally developed in jbpm-mobile\footnotemark\footnotetext{\url{https://github.com/Salaboy/jbpm-mobile}} repository.
 At the time when only screens dealing with tasks were implemented the application was able to run independently as it contained all the neccessary components.
 
 However, a problem occured when screens working with processes were added.
@@ -611,6 +612,21 @@ This allows the mobile version to be incorporated into the project.
 \subsection{Test suite}
 
 \chapter{Summary}
+The main goal of this thesis was to find the ideal solution for a mobile version of the jBPM Console and implement it.
+This was achieved and the work progress is documented in the previous chapters.
+The source code of the application as well as the distribution WAR file are attached.
+
+Since the beginning of the development process, all steps were regularly discussed with one of the jBPM core developers, Mauricio Salatino.
+This was done in order to ensure that the project would meet the expectations and be accepted by the jBPM community.
+As mentioned in section~\ref{subsec:integration}, the mobile application has already been incorporated into the jBPM Console project.
+However, it is now only in the mobile-integration branch.
+To get to the master branch there needs to be some discussion in the jBPM community and it will probably also need to be approved by Red Hat, the company which is in charge of the project.
+
+Although the basic functionality has been implemented, there are still many ways in which the mobile application can be enhanced.
+Besides adding some new screens or extending the existing ones, other changes may also be performed.
+For example the application's look\&feel could be improved by applying some nice-looking CSS.
+Or it might be optimized also for tablets which offer higher screen resolution than smartphones.
+The author of this thesis plans to continue developing the application and implement some of the enhancements mentioned above.
 
 \printbibliography
 
