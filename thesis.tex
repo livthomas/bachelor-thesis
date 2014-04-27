@@ -107,9 +107,9 @@ The examples of such stores are App Store\footnotemark\footnotetext{\url{http://
 
 While developing a native application you have a full access to all the advanced features of the chosen platform like special hardware or operating system-specific functions.
 Such software has much better performance than the one created using other approaches because of the lower level of abstraction.
-Because these applications are distributed by the mentioned markets, they can be easily monetized.
+While these applications are distributed by the mentioned markets, they can be easily monetized.
 The presence in the market also allows the discoverability of the work of lesser-known authors (or companies) as users can find all applications on one place.
-Another advantage of the centralized application market under the control of the company which develops given platform is that it ensures the quality and safety of the applications.
+Another advantage of the centralized application market under the control of the company which develops and maintains given platform is that it ensures the quality and safety of the applications.
 
 On the other hand sometimes there may be a conflict between the author's idea of licensing, pricing or updating policy of the application and the rules that must be followed to place the application into the market.
 In such cases it is much more difficult to distribute native applications without using the market because the third-part applications are often considered as a security hole and their installation is not allowed by default.
@@ -508,7 +508,7 @@ Going more into the detail, they transform database entities returned by jBPM se
 
 DataServiceEntryPoint is a wrapper for two jBPM services -- RuntimeDataService and BPMN2DataService.
 The first one provides methods for getting information about process definitions, process instances and their variables.
-The second one can be used to get basic information about entities, domain objects, data, forms and tasks associated with a particular business process.
+The second one can be used to get some basic information about entities, domain objects, data, forms and tasks associated with a particular business process.
 
 \begin{figure}[ht!]
 \centering
@@ -555,18 +555,54 @@ It is also a simple adapter like DataServiceEntryPoint so it does not add any fu
 
 
 Figure~\ref{fig:complete-task} is showing sequence of steps that are executed in order to complete a given task.
-Identity provider from UberFire is used in order to get the name of the currently logged-in.
+Identity provider from UberFire is used to get the name of the currently logged-in user.
 
 \section{Problems}
-\subsection{Place manager}
-\subsection{Integration}
-\subsection{Deployment}
+During the software development process there are always some difficulties that require a lot of time and effort to be resolved.
+This section mentions some of the problems that occured during the implementation of the mobile application and describes how they were handled.
 
-%\section{Repository}
+\subsection{Place manager}
+One of the main issues was about implementing the right solution for moving between the screens.
+While the project is divided into several modules that can be re-used independently it was essential not to create unnecessary dependencies just because there is a need to move between the screens from different modules.
+
+Firstly, a presenter that was in charge of the actual view needed to keep instances of another presenters in order to shift to their views.
+This simple solution had a lot of drawbacks including the excess dependencies mentioned above.
+It was implemented just to speed up the development process and stay focused on more important parts of the application.
+
+Later when some screens had already been created and successfully tested the mechanism of switching between the screens was completely rewritten.
+The new solution was inspired by the one used in MGWT Showcase\footnotemark\footnotetext{\url{https://github.com/dankurka/mgwt.showcase}}.
+It was based on one common place manager which was used by all the presenters to switch to other screens.
+For each screen a new Place class was created to represent it.
+When there was a request to change the actual screen a new instance of this class was created.
+Besides indicating which screen would be switched to, it could also carry some parameters for the target view.
+Although this solution removed the direct dependencies between presenters, the modules were still not independent as presenters needed to use the place classes of other screens.
+
+Finally, it was decided to implement a solution very similar to the one used in the jBPM Console.
+It is also based on a place manager but instead of a special class every screen is represented by a string value.
+This allows modules to be independant on each other and be able to move between the screens from different modules at the same time.
+It is also a preparation for future migration to UberFire.
+
+\subsection{Integration}
+The application was originally developed in jbpm-mobile\footnotemark\footnotetext{\url{https://github.com/Salaboy/jbpm-mobile}} repository which belongs to one of the jBPM core developers, Mauricio Salatino.
+At the time when only screens dealing with tasks were implemented the application was able to run independently as it contained all the neccessary components.
+
+However, a problem occured when screens working with processes were added.
+It was necessary to deploy a project containing process definitions in order to start working with them.
+To do that jBPM Console needed to be deployed on the application server together with its mobile version.
+Because these applications were independent but used the same components there were some conflicts which prevented them from being deployed at the same time.
+
+So it was decided to integrate the mobile version directly to the jBPM Console project to avoid this problem.
+This step was planned to be performed when the application was completely finished.
+But the circumstances forced them sooner to be able to continue with the development.
+The project was thus moved to mobile-integration branch of jbpm-console-ng repository\footnotemark\footnotetext{\url{https://github.com/droolsjbpm/jbpm-console-ng/tree/mobile-integration}} as a new module of jBPM Console.
+To get to the mobile screens it is now necessary to show the MobilePresenter in a standalone mode.
 
 \section{Licensing}
 The project is licensed under the Apache License, Version 2.0\footnotemark\footnotetext{\url{http://www.apache.org/licenses/LICENSE-2.0}}.
+It is a free software license that allows users of the software to use, distribute and modify it without being charged.
 
+It was decided to use this license in order to stay compatible with the jBPM Console project which is also licensed under it.
+This allows the mobile version to be incorporated into the project.
 
 \chapter{Testing}
 \section{Manual testing}
