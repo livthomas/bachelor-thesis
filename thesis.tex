@@ -85,7 +85,6 @@ The results are presented and plans for future enhancements are outlined.
 The outcome of this thesis is a brief overview of the problematics of developing applications optimized for mobile devices.
 This knowledge is applied while implementing a mobile version of jBPM Console.
 The output of the practical part is a fully functional mobile web application as well as the related test suite.
-The author plans to continue working on this project and improve it by implementing some other functionality that is present in the original jBPM Console application.
 
 \chapter{Mobile applications development}
 \label{chap:chapter2}
@@ -299,7 +298,7 @@ From the developer's point of view jBPM Console is a modular application.
 Easily said almost every perspective is one independent module.
 This approach allows developers to combine modules from different projects and create new applications based on current needs without code duplication.
 A typical example is KIE Workbench which is basically jBPM Console merged with Drools Workbench.
-The result is a complex application for business and rules management with some additional functionality like remote access to its services.
+The result is a complex application for business processes and rules management with some additional functionality like remote access to its services.
 
 %\subsection{Remote access}
 
@@ -606,9 +605,22 @@ It was decided to use this license in order to stay compatible with the jBPM Con
 This allows the mobile version to be incorporated into the project.
 
 \chapter{Testing}
+Testing is a very important part of a software development life-cycle.
+It helps to detect unseen errors and assure that an application is working as expected.
+This chapter describes how the mobile application being developed has been tested.
+Two different approaches are mentioned -- manual and automated testing.
+
 \section{Manual testing}
+
+
 \section{Automated functional testing}
+In case of web-based applications, automated functional testing means clicking on the given elements and filling in the forms according to the selected scenario.
+It may seem unnecessary to write these kind of tests for fundamental operations while the application is tested manually many times before it is realeased.
+However, test coverage of basic functionality really helps to quickly find regressions when a lot of changes are made.
+This applies especially for development of large enterprise applications where it is quite likely that a small modification of source code can cause serious problems and there is no time to check everything manually after each change.
+
 \subsection{Selendroid}
+\subsection{iOS Driver}
 \subsection{Test suite}
 
 \chapter{Summary}
