@@ -144,7 +144,7 @@ Nowadays there are basically two ways how to integrate them to one final solutio
 
 \subsection{Responsive web design}
 Responsive web design is a technique for developing web applications optimized for different types of devices.
-It uses mostly CSS but also JavaScript to adapt the page content to the actual size of the browser's window. \cite{marcotte11}
+It uses mostly CSS but also JavaScript to adapt the page content to the actual size of the browser's window \cite{marcotte11}.
 This technique is suitable when developing a mobile version side-by-side with the full web application.
 
 \subsection{Adaptive delivery}
@@ -193,7 +193,7 @@ In the past it was usual that every BPM suite implemented and used its own repre
 As portability became one of the key issues it was necessary to somehow unify these representations and standardize the final outcome so users would be able to reuse their business processes across different BPM tools.
 
 This is why Business Process Model and Notation (BPMN), a standard maintained by the Object Management Group (OMG), was created.
-The latest version, BPMN 2.0, is both a business-friendly diagramming notation and an executable process language. \cite{silver11}
+The latest version, BPMN 2.0, is both a business-friendly diagramming notation and an executable process language \cite{silver11}.
 The graphical notation of business processes is very similar to activity diagrams from Unified Modelling Language (UML).
 A process model is stored as an Extensible Markup Language (XML) file which besides diagram description contains also other information about the process like its data, messages, task assignments etc.
 
@@ -205,16 +205,15 @@ A process model is stored as an Extensible Markup Language (XML) file which besi
 \end{figure}
 
 \section{jBPM}
-jBPM is an open-source BPM suite developed by the JBoss community.
+jBPM is an open-source BPM suite developed by the JBoss community \cite{jbpm6overview}.
 It can be used to easily model, execute and monitor business processes throughout their life cycle.
 The core of jBPM is a light-weight workflow engine that allows users to execute business processes described using the BPMN 2.0 specification.
 It can be both embedded in an application or run as a service which users can make use of through the remote APIs.
 Besides the core engine, jBPM project also includes other components like a web-based workbench which provides graphical user interface (GUI) for complex management of business processes and Eclipse\footnotemark\footnotetext{\url{https://www.eclipse.org/}} tooling for modeling, testing and debugging of processes.
-\cite{jbpm6overview}
 
 \subsection{Core Engine}
 \label{subsec:core-engine}
-The core jBPM engine provides KIE\footnotemark\footnotetext{KIE stands for Knowledge Is Everything.} API \cite{jbpm6api} to control the execution of business processes.
+The core jBPM engine provides KIE\footnotemark\footnotetext{KIE stands for Knowledge Is Everything.} API to control the execution of business processes \cite{jbpm6api,jbpm6engine}.
 To start working with processes it is first necessary to set up Runtime Environment.
 The most important thing here that needs to be specified is a list of process definition files.
 These definitions are parsed and stored in a form which allows fast automated execution.
@@ -222,7 +221,6 @@ After that Runtime Manager, which is resposible for delivering instances of Runt
 Runtime Engine encapsulates the two most important elements of the jBPM engine -- KIE Session and Task Service.
 KIE Session provides an interface to communicate with the engine.
 It allows users to start new processes, manipulate with the running ones or get some information about those that has already finished.
-\cite{jbpm6engine}
 
 \subsection{Task Service}
 The Task Service is a special part of the engine responsible for human task management.
@@ -320,7 +318,7 @@ The only difference is in the development process.
 While native applications need to be developed separately for each platform there is only one common code of a hybrid application which is then compiled for each platform.
 
 While these applications run directly on mobile devices there is a need to communicate with KIE Workbench remotely.
-This can be achieved by using the REST\footnotemark\footnotetext{Representational state transfer (REST) is an architectural style which uses HTTP commands to execute different actions on resources provided by the server. \cite{fielding20}} API it provides.
+This can be achieved by using the REST\footnotemark\footnotetext{Representational state transfer (REST) is an architectural style which uses HTTP commands to execute different actions on resources provided by the server \cite{fielding20}.} API it provides.
 Using this interface a client application can execute all common operations with processes or human tasks.
 There is practically no difference between executing them via the web GUI of the jBPM Console or using REST calls as the same backend services are called in both cases.
 
@@ -348,7 +346,7 @@ This allows to create completely different screens for mobile and desktop users.
 jBPM Console is implemented using the Model–view–presenter (MVP) pattern so there is an option to add new implementations of view interfaces optimized especially for mobile devices.
 
 \section{Previous attempt}
-Last year there was an attempt to implement a mobile version of jBPM Console. \cite{petovsky13}
+Last year there was an attempt to implement a mobile version of jBPM Console \cite{petovsky13}.
 At that time the jBPM 6 was just being developed and no stable build of that version had been released so the author decided to use more reliable jBPM 5.
 He chose to implement his solution as a native application for Android devices.
 
@@ -401,7 +399,7 @@ It would be very unpractical to set up projects or design new processes on mobil
 \label{fig:use-case}
 \end{figure}
 
-The roles used in the use case diagram (figure~\ref{fig:use-case}) are the only two out of five user roles available in the jBPM Console which have the right to work with process runtime and human tasks. \cite{jbpm6roles}
+The roles used in the use case diagram (figure~\ref{fig:use-case}) are the only two out of five user roles available in the jBPM Console which have the right to work with process runtime and human tasks \cite{jbpm6roles}.
 
 \subsection{Screens and navigation}
 Considering all use cases mentioned above, the application GUI can be divided into three sections - process definitions, process instances and human tasks.
@@ -435,7 +433,7 @@ The delegation of the task to someone else is possible here, too.
 When designing class hierarchy of any large scale application it is a good practise to follow a design pattern.
 Although a mobile version of the jBPM Console as described in this thesis is not that big, the further development must be taken into account and so it is essential to design it in accordance with some pattern.
 While model–view–presenter (MVP) is one of the most popular design patterns for web applications it was decided to adopt it.
-This pattern is also used in the original application and fits the best with the used technologies. \cite{ramsdale10}
+This pattern is also used in the original application and fits the best with the used technologies \cite{ramsdale10}.
 
 \begin{figure}[ht!]
 \centering
@@ -448,7 +446,13 @@ The class diagram (figure~\ref{fig:class-diagram}) is very similar to the visual
 When following the MVP design pattern there needs to be a single presenter and the corresponding view for each screen.
 All view classes have one common ancestor which defines the uniform look for them.
 
-%\subsection{Modularization}
+\subsection{Modules}
+The application is divided into three modules.
+Core module contains some common classes used by all views.
+There are also view and presenter classes for Home screen located in this module.
+Process Runtime module includes all views and presenters working with process definitions and instances.
+Human Tasks module comprises of classes associated with tasks screens.
+All diagrams in this document use specific color for each module.
 
 \chapter{Implementation}
 So far the application architecture was only described on the abstract level.
@@ -460,7 +464,7 @@ This section provides a quick overview of used technologies.
 Each of them is briefly introduced and then the explanation why it was decided to use it is given.
 
 \subsection{Google Web Toolkit}
-Google Web Toolkit (GWT) is a development toolkit for building and optimizing complex browser-based applications. \cite{gwtoverview}
+Google Web Toolkit (GWT) is a development toolkit for building and optimizing complex browser-based applications \cite{gwtoverview}.
 The biggest difference in comparison with other tools is the fact that using GWT developers write their code in Java and it is then compiled to JavaScript.
 This brings some benefits when creating large applications as there are lots of advanced tools for development in Java and the language itself compared with JavaScript has some useful features like strong static type-checking and object-oriented design.
 
@@ -473,11 +477,11 @@ It adds support for touch events, animations and lots of mobile widgets with pla
 
 There are also other projects with similar capabilities, for example jQuery Mobile wrapper for GWT\footnotemark\footnotetext{\url{https://github.com/jqm4gwt/jqm4gwt}} (jqm4gwt).
 But it was decided to use the MGWT despite the fact that jqm4gwt provides richer pallete of widgets.
-The main reason is because the leading developer of MGWT has become a member of the GWT Steering Committee and there are intensions to add support for mobile devices to the next major release of GWT. \cite{gwtroadmap}
+The main reason is because the leading developer of MGWT has become a member of the GWT Steering Committee and there are intensions to add support for mobile devices to the next major release of GWT \cite{gwtroadmap}.
 This means that GWT 3.0 will probably introduce a new widgets very similar to those from MGWT and so it should be quite easy to switch to it.
 
 \subsection{Errai Framework}
-Errai is a GWT-based framework for building rich web applications. \cite{erraidoc}
+Errai is a GWT-based framework for building rich web applications \cite{erraidoc}.
 It provides many useful features from which the most important for this project is the client-side integration for CDI\footnotemark\footnotetext{CDI (Contexts and Dependency Injection) is the Jave EE standard (JSR-299) for handling dependency injection.} and remote procedure calls (RPC) for client-server communication.
 %CDI programming model within client code
 These two things are the main reason why it was decided to use Errai.
@@ -485,7 +489,7 @@ There is an intention to re-use some parts of jBPM Console (described later in s
 %CDI
 
 \subsection{UberFire}
-UberFire is a rich client platform (RCP) that builds on the strengths of GWT and Errai. \cite{uberfire}
+UberFire is a rich client platform (RCP) that builds on the strengths of GWT and Errai \cite{uberfire}.
 It provides flexible layout components, VFS based on Git repositories and pluggable authentication and authorization system.
 
 The only part of the UberFire this project directly use is the identity provider.
@@ -611,7 +615,19 @@ This chapter describes how the mobile application being developed has been teste
 Two different approaches are mentioned -- manual and automated testing.
 
 \section{Manual testing}
+Manual testing is 
 
+\subsection{Desktop browsers}
+During the development of the application it was mostly tested in desktop web browsers, namely Chromium and Google Chrome.
+It is because the application was run in the GWT debug mode which requires the GWT developer plugin to be installed in the browser.
+This plugin is only available for desktop browsers.
+Although it may seem inappropriate to test a mobile web application in desktop browsers, there is not a big difference in comparison with mobile browsers.
+Both Chromium and Google Chrome browsers use WebKit-based layout engine and both Android and iOS default browsers use WebKit so the rendering of the page is practically the same.
+There is only difference in the appearance of the application as MGWT uses platform-specific styles by default.
+
+\subsection{Real devices}
+
+\subsection{Android Emulator}
 
 \section{Automated functional testing}
 In case of web-based applications, automated functional testing means clicking on the given elements and filling in the forms according to the selected scenario.
@@ -619,9 +635,30 @@ It may seem unnecessary to write these kind of tests for fundamental operations 
 However, test coverage of basic functionality really helps to quickly find regressions when a lot of changes are made.
 This applies especially for development of large enterprise applications where it is quite likely that a small modification of source code can cause serious problems and there is no time to check everything manually after each change.
 
+\subsection{Selenium}
+Selenium is a suite of tools to automate web browsers across many platforms.
+Besides other components it includes WebDriver, a tool which makes direct calls to the browser using each browser’s native support for automation \cite{webdriver}.
+WebDriver is the name of the key interface against which tests should be written in Java.
+The implementing classes are for example ChromeDriver, FirefoxDriver or SafariDriver.
+In the past there were also some implementations supporting mobile testing, AndroidDriver and IPhoneDriver.
+However, they have moved to separate projects, Selendroid\footnotemark\footnotetext{\url{http://selendroid.io/}} and ios-driver\footnotemark\footnotetext{\url{http://ios-driver.github.io/ios-driver/}}, as they provide more complex functionality and can be used to write tests for native applications on the given platform as well.
+
 \subsection{Selendroid}
-\subsection{iOS Driver}
+Selendroid is a test automation framework for native, hybrid and mobile web applications running on Android OS.
+It is based on WebDriver and so allows to control GUI elements of an application the same way as Selenium does.
+Selendroid uses platform-specific tools provided by Android SDK.
+It can make use of the Android Emulator or a real device plugged in via USB to run tests on it.
+
 \subsection{Test suite}
+The test suite developed for the mobile version of jBPM Console is based on Selendroid.
+All tests are run in a virtual environment of the Android Emulator.
+Before each test the emulator is started and the web application is loaded in its web browser.
+
+The suite includes tests for some basic application functionality.
+It tries to run a new process instance and check if it appears in the list of all instances.
+After that it runs a new instance of another business process and verify if in the list of instances for the given process definition appears only this instance.
+The other tests work with tasks.
+They try to claim, release, start and complete a task and check if its status is correctly changed after each of these operations.
 
 \chapter{Summary}
 The main goal of this thesis was to find the ideal solution for a mobile version of the jBPM Console and implement it.
