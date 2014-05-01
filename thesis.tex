@@ -505,6 +505,12 @@ Each of them is a wrapper for several jBPM services.
 From the architectural point of view they are all adapters so they provide interfaces different from services they call in the background.
 Going more into the detail, they transform database entities returned by jBPM services to data transfer objects (DTOs) which can be serialized and sent over the wire between server and clients.
 
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=\textwidth]{images/client-server.pdf}
+\caption{Client-server communication}
+\label{fig:client-server}
+\end{figure}
 
 \label{sec:reused-components}
 \subsection{DataServiceEntryPoint}
@@ -615,7 +621,10 @@ This chapter describes how the mobile application being developed has been teste
 Two different approaches are mentioned -- manual and automated testing.
 
 \section{Manual testing}
-Manual testing is 
+Manual testing is the simpliest way how it can be verified that an application works as expected.
+There are no special requirements, an application just needs to be built and deployed in a runtime environment.
+That is why this approach is mostly used during the development phase of an application life-cycle.
+In this section three different ways of manual testing that were used during the development of the mobile application are mentioned -- desktop browsers, physical devices and the Android Emulator.
 
 \subsection{Desktop browsers}
 During the development of the application it was mostly tested in desktop web browsers, namely Chromium and Google Chrome.
@@ -625,11 +634,21 @@ Although it may seem inappropriate to test a mobile web application in desktop b
 Both Chromium and Google Chrome browsers use WebKit-based layout engine and both Android and iOS default browsers use WebKit so the rendering of the page is practically the same.
 There is only difference in the appearance of the application as MGWT uses platform-specific styles by default.
 
-\subsection{Real devices}
+\subsection{Physical devices}
+Later when it was possible to deploy the application on an application server it was also tested using physical devices.
+Apple iPhone 4S and HTC Desire SV were chosen as representatives of the two most popular platforms, iOS and Android, as they were easily accessible to the author of this thesis.
+On each platform the application looks slightly different as MGWT tries to adopt the platform-specific look\&feel.
 
 \subsection{Android Emulator}
+The Android Emulator is a mobile device emulator included in the Android SDK\footnotemark\footnotetext{\url{http://developer.android.com/tools/help/emulator.html}}.
+It lets programmers develop and test Android applications without using a physical device.
+The emulator requires a creation of Android Virtual Devices (AVDs) which can be managed by the AVD Manager.
+When setting up a new virtual device, it is possible to specify hardware configuration as well as a version of used Android OS.
 
-\section{Automated functional testing}
+The application being developed has also been manually tested using the Android Emulator.
+However, there were only several attempts and the emulator has mostly been used in the automated tests (described later in section~\ref{subsec:test-suite}).
+
+\section{Automated testing}
 In case of web-based applications, automated functional testing means clicking on the given elements and filling in the forms according to the selected scenario.
 It may seem unnecessary to write these kind of tests for fundamental operations while the application is tested manually many times before it is realeased.
 However, test coverage of basic functionality really helps to quickly find regressions when a lot of changes are made.
@@ -647,9 +666,10 @@ However, they have moved to separate projects, Selendroid\footnotemark\footnotet
 Selendroid is a test automation framework for native, hybrid and mobile web applications running on Android OS.
 It is based on WebDriver and so allows to control GUI elements of an application the same way as Selenium does.
 Selendroid uses platform-specific tools provided by Android SDK.
-It can make use of the Android Emulator or a real device plugged in via USB to run tests on it.
+It can make use of the Android Emulator or a physical device plugged in via USB to run tests on it.
 
 \subsection{Test suite}
+\label{subsec:test-suite}
 The test suite developed for the mobile version of jBPM Console is based on Selendroid.
 All tests are run in a virtual environment of the Android Emulator.
 Before each test the emulator is started and the web application is loaded in its web browser.
