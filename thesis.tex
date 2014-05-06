@@ -50,43 +50,41 @@ business process, JBoss, jBPM, jBPM Console, mobile application, mobile web
 \chapter{Introduction}
 Nowadays, a rapid growth of the market with smart mobile devices like smartphones or tablets can be noticed.
 The parameters of these devices are nearly reaching the performance of classic desktop computers.
-Unlike them, the mobile devices also offer comfort of mobility so users have an access to their data and applications whenever or wherever they need it.
+Unlike them, mobile devices derive benefits from mobility as users have an access to their data and applications whenever or wherever they need it.
 However, the burden of this feature is lower comfort while using most of the common applications.
 Their graphical user interface (GUI) is often optimized just for standard desktop environments and does not take into account lower screen resolution that is typical for mobile devices.
-The other problem is much higher finess of the screen which causes that tiny fonts are usually unreadable without zooming in and also makes it difficult to manipulate with very small control components.
+The other problem is much higher finess of their screens which causes that tiny fonts are usually unreadable without zooming in and also makes it difficult to manipulate with very small control components.
 
 The goal of this thesis is to look through the problematics of developing applications optimized for mobile devices, compare advantages and disadvantages of different approaches and find the optimal solution for the jBPM Console\footnotemark\footnotetext{\url{http://www.jboss.org/jbpm/components/console}}.
 The mobile version of this application has been proposed on the website of the JBoss community\footnotemark\footnotetext{\url{https://community.jboss.org/wiki/JbpmProjects}} as a further extension of the jBPM project\footnotemark\footnotetext{\url{http://www.jboss.org/jbpm.html}}.
 The thesis deals with analysis, design, implementation and testing of the chosen solution which includes creation of a mobile version of this application with predefined subset of its functions like starting new processes or management of user tasks.
-As a part of this thesis the integration test suite was also developed.
-The resulting product should become a part of the jBPM Console project.
+As a part of this thesis the integration test suite is also developed.
+The resulting product should be integrated into the jBPM Console project.
 This work does not aim to make a complex review of the given field and is rather focused on the topics relevant to the implementation part.
 
 The thesis starts with an analysis of different approaches to the mobile applications development.
-These are divided into three main categories -- native, web and hybrid -- based on their similar features.
+These are divided into three main categories -- native, web and hybrid -- based on their similar attributes.
 Each category is introduced naming its characteristic features.
 Then pros and cons of using the given approach are mentioned and the most suitable use case is outlined.
-Next chapter deals with business processes, explains related terms and introduces some commonly used standards.
-The motivation for using these processes is given and it is described how they are applied to today's business environment.
-Then there is explained how business processes can be automated and how modern enterprise applications based on them are developed.
-The following sections introduce business process management (BPM) suite called jBPM.
-It is described how its workflow engine works and how can be used by developers of enterprise applications.
-Also web-based application jBPM Console for managing business processes which is based on the jBPM engine is introduced.
-This chapter describes the application only from the user's point of view.
-The underlying services that it is powered by are analysed in the next chapter as a part of the analysis and design of mobile application being developed.
-There are also mentioned previous attempts to create mobile version of jBPM Console.
-Their results together with other factors are considered while choosing the most suitable way of implementing this project.
-An adaptive mobile web application is chosen as the final solution.
-Next chapter describes the implementation process.
-The technologies used are described and some of the most serious problems that occured during this step are mentioned.
-The chapter about testing explains what is the main focus while testing this kind of application.
-Both unit testing of GWT components and functional testing by Selenium is performed.
+Next chapter introduces business processes, describes how they can be automated and how modern enterprise applications based on them are developed.
+Business process management (BPM) suite called jBPM is introduced and the description of how its workflow engine works and how it can be used by developers of enterprise applications is given.
+Also a web-based application jBPM Console, which is based on the jBPM engine and provides rich set of tools for complex management of business processes, is introduced.
+The application is only described from the user's point of view.
+The underlying services are mentioned later during the implementation phase when some of them are re-used in the mobile application.
+The following chapter deals with the analysis and design of the application being developed.
+A previous attempt to create a mobile version of the jBPM Console is also mentioned.
+The results of that work together with other factors are considered while looking for the proper way of designing and implementing the application.
+A mobile web application is chosen as the most capable solution.
+Next chapter points out some interesting parts of the implementation phase.
+The technologies used are introduced and the most serious problems that occured during this step are mentioned.
+The chapter about testing describes different methods used to ensure that the application is working as expected.
+The motivation for automated testing is also given and technical details of the developed test suite are explained.
 The last chapter is a summary of the work done on this project.
 The results are presented and plans for future enhancements are outlined.
 
 The outcome of this thesis is a brief overview of the problematics of developing applications optimized for mobile devices.
-This knowledge is applied while implementing a mobile version of jBPM Console.
-The output of the practical part is a fully functional mobile web application as well as the related test suite.
+This knowledge is applied while implementing a mobile version of the jBPM Console.
+The output of the practical part is a fully functional mobile web application as well as the corresponding test suite.
 
 \chapter{Mobile applications development}
 \label{chap:chapter2}
