@@ -14,6 +14,9 @@
 \thesisadvisor{RNDr. Adam Rambousek}
 \thesislang{en}
 
+\setcounter{biburlnumpenalty}{100}
+\setcounter{biburlucpenalty}{100}
+\setcounter{biburllcpenalty}{100}
 \addbibresource{bibliography.bib}
 
 \begin{document}
@@ -30,7 +33,7 @@ Foremost, I would like to express my gratitude to my technical supervisor Ing. J
 
 I would also like to thank my advisor RNDr. Adam Rambousek for helping me with all formal aspects of academic writing.
 
-Another big thanks belongs to the jBPM community, especially to the jBPM core developer Ing. Mauricio Salatino who introduced me to the jBPM Console project and helped me a lot with integrating my work into it.
+Another big thanks belongs to the jBPM community, especially to Ing. Mauricio Salatino who introduced me to the jBPM Console project and helped me a lot with integrating my work into it.
 Without him I would never be able to successfully finish the practical part of my thesis.
 \end{ThesisThanks}
 
@@ -57,12 +60,12 @@ The other problem is much higher finess of their screens which causes that tiny 
 
 The goal of this thesis is to look through the problematics of developing applications optimized for mobile devices, compare advantages and disadvantages of different approaches and find the optimal solution for the jBPM Console\footnotemark\footnotetext{\url{http://www.jboss.org/jbpm/components/console}}.
 The mobile version of this application has been proposed on the website of the JBoss community\footnotemark\footnotetext{\url{https://community.jboss.org/wiki/JbpmProjects}} as a further extension of the jBPM project\footnotemark\footnotetext{\url{http://www.jboss.org/jbpm.html}}.
-The thesis deals with analysis, design, implementation and testing of the chosen solution which includes creation of a mobile version of this application with predefined subset of its functions like starting new processes or management of user tasks.
+The thesis deals with analysis, design, implementation and testing of the chosen solution which includes creating a mobile version of this application with predefined subset of its functions like starting new processes or management of user tasks.
 As a part of this thesis the integration test suite is also developed.
 The resulting product should be integrated into the jBPM Console project.
 This work does not aim to make a complex review of the given field and is rather focused on the topics relevant to the implementation part.
 
-The thesis starts with an analysis of different approaches to the mobile applications development.
+The thesis starts with an analysis of different approaches to mobile applications development.
 These are divided into three main categories -- native, web and hybrid -- based on their similar attributes.
 Each category is introduced naming its characteristic features.
 Then pros and cons of using the given approach are mentioned and the most suitable use case is outlined.
@@ -74,7 +77,7 @@ The underlying services are mentioned later during the implementation phase when
 The following chapter deals with the analysis and design of the application being developed.
 A previous attempt to create a mobile version of the jBPM Console is also mentioned.
 The results of that work together with other factors are considered while looking for the proper way of designing and implementing the application.
-A mobile web application is chosen as the most capable solution.
+Finally, a mobile web application is chosen as the most capable solution and the application architecture is drafted.
 Next chapter points out some interesting parts of the implementation phase.
 The technologies used are introduced and the most serious problems that occured during this step are mentioned.
 The chapter about testing describes different methods used to ensure that the application is working as expected.
@@ -105,23 +108,23 @@ These applications are installed directly into the target device and are distrib
 The examples of such stores are App Store\footnotemark\footnotetext{\url{http://store.apple.com}}, BlackBerry World\footnotemark\footnotetext{\url{http://appworld.blackberry.com}}, Google Play\footnotemark\footnotetext{\url{https://play.google.com/store}} or Windows Phone Store\footnotemark\footnotetext{\url{http://www.windowsphone.com/en-us/store}}.
 
 While developing a native application you have a full access to all the advanced features of the chosen platform like special hardware or operating system-specific functions.
-Such software has much better performance than the one created using other approaches because of the lower level of abstraction.
-While these applications are distributed by the mentioned markets, they can be easily monetized.
+Such software has much better performance than the one created using other approaches because of the lower level of abstraction \cite{cowart13}.
+While these applications are distributed by the markets mentioned above, they can be easily monetized.
 The presence in the market also allows the discoverability of the work of lesser-known authors (or companies) as users can find all applications on one place.
 Another advantage of the centralized application market under the control of the company which develops and maintains given platform is that it ensures the quality and safety of the applications.
 
-On the other hand sometimes there may be a conflict between the author's idea of licensing, pricing or updating policy of the application and the rules that must be followed to place the application into the market.
+On the other hand, sometimes there may be a conflict between the author's idea of licensing, pricing or updating policy of the application and the rules that must be followed to place the application into the market.
 In such cases it is much more difficult to distribute native applications without using the market because the third-part applications are often considered as a security hole and their installation is not allowed by default.
 Another problem might be the fact that every platform has its own set of development tools, programming languages and software development kits (SDKs), which make it practically impossible to create cross-platform applications.
 This means that a new application needs to be created for each platform which increases the costs of the development proccess.
-Users can also use older versions of the application which may bring some additional problems especially when developers add some new functionality to the application that is communicating with the remote devices.
+Users can also use older versions of the application which may bring some additional problems, especially when developers add some new functionality to the application that is communicating with the remote devices.
 In such cases there is a need for backward compatibility between the different versions.
 This may prevent developers from making significant changes and slow down the whole development process.
 
 \section{Mobile web applications}
 Mobile web applications are special web pages optimized for mobile devices.
 They take into account the limitations and differences of these devices in comparison with desktop computers.
-These include smaller screen size, higher fineness of the display, absence of mouse and keyboard, presence of touch control and limited computation power.
+These include smaller screen size, higher fineness of the display, absence of mouse and keyboard, presence of touch control and limited computation power \cite{wroblewski11}.
 But the basic principles of all web pages are also applied in this case.
 So you can still find HyperText Markup Language (HTML), Cascading Style Sheets (CSS) and JavaScript on the client's side and the server-side functionality implemented in any suitable language, e.g. PHP, Ruby, Python, Perl or even Java.
 
@@ -142,19 +145,19 @@ When designing a mobile web application it is often created as a subset of the f
 In such cases there is usually an intension to somehow connect these two versions to support uniformity and avoid code duplicates.
 Nowadays there are basically two ways how to integrate them to one final solution.
 
-\subsection{Responsive web design}
-Responsive web design is a technique for developing web applications optimized for different types of devices.
-It uses mostly CSS but also JavaScript to adapt the page content to the actual size of the browser's window \cite{marcotte11}.
+\subsection{Responsive design}
+Responsive design is a technique for developing web applications optimized for different types of devices.
+It uses mostly CSS as well as JavaScript to adapt a page content to the actual size of the browser's window \cite{marcotte11}.
 This technique is suitable when developing a mobile version side-by-side with the full web application.
 
 \subsection{Adaptive delivery}
-Adaptive delivery is very similar to the responsive web design.
+Adaptive delivery is very similar to the responsive design.
 The main difference is the time when it is decided how the requested page will look like.
 While using responsive design it is decided on the client's side by CSS and JavaScript according to the browser's window size, the adaptive delivery is based on different principle.
 A type of the client's device is recognized on the server side and only a page for this type of device is sent to the client.
 This reduces the amount of incoming traffic on the client side.
 It also allows developers to include only relevant parts of the original application in the mobile version.
-Some actions might be very difficult to perform on the mobile device so they are likely not to be used and can be ommited from the mobile version.
+Some actions might be very difficult to be performed on mobile devices so they are likely not to be used and can be ommited from the mobile version.
 This approach is prefered to be used also in situations when there is an existing application which is too complex to be changed using the techniques of responsive web design.
 
 \section{Hybrid applications}
@@ -183,7 +186,7 @@ A business process is a sequence of steps that need to be performed in order to 
 From the technical point of view it can be described as a collection of activities or tasks mutually connected to a logical structure ordered by their time continuity.
 Thanks to that a business process can be visualized as a flowchart\footnotemark\footnotetext{A flowchart is a type of diagram used to visualize a process. The individual steps of this process are displayed as various boxes which are connected to each other with arrows determining their order.}.
 
-Nowadays, business processes are so complex and regularly changed that it is practically impossible to hardcode them into the applications and be efficient while adapting to the changes at the same time.
+Nowadays, business processes are quite complex and changed so often, that it is practically impossible to hardcode them into the applications and be efficient while adapting to the changes at the same time.
 That is why business process management (BPM) tools are used. % BPM vysvetlene uz v uvode
 They take control of the maintenance of your business processes and provide API through which your application can easily manipulate with these processes.
 This allows developers to focus on the application itself because they do not need to adapt it to the changes in business processes as it is a role of the used BPM tool.
@@ -192,15 +195,15 @@ This allows developers to focus on the application itself because they do not ne
 In the past it was usual that every BPM suite implemented and used its own representation of business processes.
 As portability became one of the key issues it was necessary to somehow unify these representations and standardize the final outcome so users would be able to reuse their business processes across different BPM tools.
 
-This is why Business Process Model and Notation (BPMN), a standard maintained by the Object Management Group (OMG), was created.
+This is why Business Process Model and Notation (BPMN), a~standard maintained by the Object Management Group (OMG), was created.
 The latest version, BPMN 2.0, is both a business-friendly diagramming notation and an executable process language \cite{silver11}.
 The graphical notation of business processes is very similar to activity diagrams from Unified Modelling Language (UML).
 A process model is stored as an Extensible Markup Language (XML) file which besides diagram description contains also other information about the process like its data, messages, task assignments etc.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{images/process-example.png}
-\caption{Simple example of a business process in BPMN 2.0}
+\includegraphics[width=\textwidth]{images/process-example.pdf}
+\caption{Business process in BPMN 2.0}
 \label{fig:process-example}
 \end{figure}
 
@@ -229,12 +232,12 @@ Human tasks are used to signalize that users are working on something outside of
 Every task is assigned to a specific actor or a group of actors who can claim it and start working on it.
 The human task itself has its own life cycle which consists of several states.
 The simplified version containing only states relevant to the use cases in jBPM Console is visualized in the figure~\ref{fig:task-lifecycle}.
-For a more complex description including all possible states and transitions between them see the jBPM Documentation \cite{jbpm6tasklife} or WS-HumanTask Specification \cite{ws-humantask}.
+For a more complex description including all possible states and transitions between them see the jBPM Documentation or WS-HumanTask Specification \cite{jbpm6tasklife,ws-humantask}.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{images/task-lifecycle.png}
-\caption{Simplified version of a human task life cycle}
+\includegraphics[width=\textwidth]{images/task-lifecycle.pdf}
+\caption{Human task life cycle}
 \label{fig:task-lifecycle}
 \end{figure}
 
@@ -262,7 +265,6 @@ Each one of them represents one step in the process life cycle.
 
 Authoring perspective is based on the Guvnor component and allows users to manage business assets.
 Individual files are stored in Git\footnotemark\footnotetext{Git is a distributed version control system. \url{http://git-scm.com/}} repositories on which a virtual file system (VFS) is based.
-%These repositories are organized into bigger structures called organizational units.
 Users can create a new repositories or clone the remote ones.
 Maven\footnotemark\footnotetext{Maven is a software project management tool. \url{http://maven.apache.org/}} projects are created inside these repositories to simplify organization of the files.
 Within these projects several types of new files can be created from which the most important are business process definitions in BPMN 2.0 format and task as well as process forms.
@@ -275,8 +277,7 @@ Users are able to undeploy these projects or create a new deployment unit.
 
 Processes from the deployed projects are all listed in the process definitions list which is a part of the Process Management perspective.
 For each process definition there are options to start it as a new process, view its flowchart representation or view all of its instances.
-If a process is started a user is prompted to fill in the process form which consists of some input fields.
-%if there are any defined.
+If a process is started, a user is prompted to fill in the process form which consists of some input fields.
 These inputs are used to initialize process variables.
 All process instances are listed in the process instance list where they can be easily controlled.
 A running process can be aborted or a signal can be sent to it by a user.
@@ -286,20 +287,21 @@ The Tasks perspective is the one responsible for human tasks management.
 Users can view all the tasks that belongs to them or to the groups they are members of.
 These tasks are usually created as a result of business process execution but users are also able to create their own personal tasks which do not participate in any process.
 Several actions can be executed on these tasks like claiming the ones that nobody is working on, starting work on the claimed tasks and completing tasks.
-%Form Modeller
-
-From all the perspectives mentioned above the Process Management and Tasks are the only one that will be included in the mobile version.
 
 \subsection{Modular approach}
 
 From the developer's point of view jBPM Console is a modular application.
-Easily said almost every perspective is one independent module.
+Easily said, almost every perspective is one independent module.
 This approach allows developers to combine modules from different projects and create new applications based on current needs without code duplication.
-A typical example is KIE Workbench which is basically jBPM Console merged with Drools Workbench.
-The result is a complex application for business processes and rules management with some additional functionality like remote access to its services.
+A typical example is the KIE Workbench, which is basically jBPM Console merged with Drools Workbench (shown in figure~\ref{fig:project-structure}).
+The result is a complex application for business process and rule management with some additional functionality like remote access to its services.
 
-%\subsection{Remote access}
-
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=0.9\textwidth]{images/project-structure.png}
+\caption{Project distributions, taken from \cite{salaboy13}}
+\label{fig:project-structure}
+\end{figure}
 
 \chapter{Analysis and design}
 To be able to design the right solution for the mobile version of the jBPM Console it is essential to compare pros and cons of different approaches to mobile applications development (described in chapter~\ref{chap:chapter2}) with the requirements of the application being developed.
@@ -324,13 +326,13 @@ There is practically no difference between executing them via the web GUI of the
 
 However, this solution has some serious drawbacks.
 Not everything can be executed using the REST API.
-If there is a need to perform some more complicated commands this interface will have to be extended.
+If there is a need to perform some more complicated commands, this interface will have to be extended.
 Also every change to the API urges developers to modify all platform-specific clients.
 
 \subsection{Web application}
 \label{sec:webapp}
 The jBPM Console itself is a web application.
-That means if a mobile version is also a web application it might be directly a part of the jBPM Console.
+That means if a mobile version is also a web application, it might be directly a part of the jBPM Console.
 The maintenance of such solution will be much easier than managing several platform-specific clients.
 There is also no problem with the limited interface as in this case the mobile version will have access to the same resources as the original application.
 This solution can be also divided into two slightly different approaches.
@@ -380,7 +382,7 @@ In the mobile version a new page for each of these panels must be created.
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=\textwidth]{images/kie-workbench.png}
-\caption{Process definitions list in KIE Workbench}
+\caption{Process definitions in KIE Workbench}
 \label{fig:kie-workbench}
 \end{figure}
 
@@ -446,7 +448,7 @@ The delegation of the task to someone else is possible here, too.
 
 When designing class hierarchy of any large scale application it is a good practise to follow a design pattern.
 Although a mobile version of the jBPM Console as described in this thesis is not that big, the further development must be taken into account and so it is essential to design it in accordance with some pattern.
-While model–view–presenter (MVP) is one of the most popular design patterns for web applications it was decided to adopt it.
+While model-view-presenter (MVP) is one of the most popular design patterns for web applications it was decided to adopt it.
 This pattern is also used in the original application and fits the best with the used technologies \cite{ramsdale10}.
 
 The class diagram (figure~\ref{fig:class-diagram}) is very similar to the visualization of navigation between screens.
@@ -476,7 +478,7 @@ The biggest difference in comparison with other tools is the fact that using GWT
 This brings some benefits when creating large applications as there are lots of advanced tools for development in Java and the language itself compared with JavaScript has some useful features like strong static type-checking and object-oriented design.
 
 It was decided to use GWT because the jBPM Console is based on it and there was a demand to reuse as many components as possible.
-To achieve that it is helpful to build the mobile version using the same technologies as the original application.
+To achieve that it is convenient to build the mobile version using the same technologies as the original application.
 
 \subsection{Mobile GWT}
 Mobile GWT (MGWT) extends GWT functionality by adding new features which make it easier to develop web applications optimized for mobile devices.
@@ -506,9 +508,9 @@ Since it was decided to use the same technologies, the mobile application is abl
 This section introduces these services, describes how exactly they are called and what is executed in the background.
 
 Basically, all re-used components from jBPM Console described below are designed the same way.
-Each of them is a wrapper for several jBPM services.
+Each one of them is a wrapper for several jBPM services.
 From the architectural point of view they are all adapters so they provide interfaces different from services they call in the background.
-Going more into the detail, they transform database entities returned by jBPM services to data transfer objects (DTOs) which can be serialized and sent over the wire between server and clients.
+Going more into the detail, they transform database entities returned by jBPM services to data transfer objects (DTOs), which can be serialized and sent over the wire between server and clients.
 
 \begin{figure}[ht!]
 \centering
@@ -520,7 +522,7 @@ Going more into the detail, they transform database entities returned by jBPM se
 \label{sec:reused-components}
 \subsection{DataServiceEntryPoint}
 
-DataServiceEntryPoint is a wrapper for two jBPM services -- RuntimeDataService and BPMN2DataService.
+DataServiceEntryPoint is a wrapper for two jBPM services, RuntimeDataService and BPMN2DataService.
 The first one provides methods for getting information about process definitions, process instances and their variables.
 The second one can be used to get some basic information about entities, domain objects, data, forms and tasks associated with a particular business process.
 
@@ -531,14 +533,14 @@ The second one can be used to get some basic information about entities, domain 
 \label{fig:refresh-instances}
 \end{figure}
 
-The sequence diagram in figure~\ref{fig:refresh-instances} is showing how DataServiceEntryPoint is used in the mobile application.
+The sequence diagram in figure~\ref{fig:refresh-instances} is showing how DataService-EntryPoint is used in the mobile application.
 This example describes the whole process of refreshing the list of process instances.
 The components on the left are compiled to JavaScript and operate on the client side while the components on the right are run on the application server.
 The calling of getProcessInstances() method on DataServiceEntryPoint is implemented using RPC.
 
 \subsection{KieSessionEntryPoint}
 
-KieSessionEntryPoint works with two jBPM services -- DeploymentService and RuntimeDataService.
+KieSessionEntryPoint works with two jBPM services, Deployment-Service and RuntimeDataService.
 The first one deals with deployment units which are not used in the mobile application.
 The second one was described in the previous section.
 It may seem like this component does not provide anything more than DataServiceEntryPoint.
@@ -552,7 +554,7 @@ It allows starting new process instances, aborting, suspending and signaling the
 \label{fig:abort-process}
 \end{figure}
 
-The example shown in figure~\ref{fig:abort-process} explains what is performed when abortProcessInstance() method of KieSessionEntryPoint is called.
+The example shown in figure~\ref{fig:abort-process} explains what steps are performed when \verb|abortProcessInstance()| method of KieSession-EntryPoint is called.
 This component works directly with RuntimeManager, RuntimeEngine and KieSession (described in section~\ref{subsec:core-engine}).
 
 \subsection{TaskServiceEntryPoint}
@@ -651,10 +653,10 @@ The emulator requires a creation of Android Virtual Devices (AVDs) which can be 
 When setting up a new virtual device, it is possible to specify hardware configuration as well as a version of used Android OS.
 
 The application being developed has also been manually tested using the Android Emulator.
-However, there were only several attempts and the emulator has mostly been used in the automated tests (described later in section~\ref{subsec:test-suite}).
+However, there were only several attempts and the emulator has mostly been used by the test suite (described later in section~\ref{subsec:test-suite}).
 
 \section{Automated testing}
-In case of web-based applications, automated functional testing means clicking on the given elements and filling in the forms according to the selected scenario.
+In case of web-based applications, automated functional testing involves clicking on the given elements and filling in the forms according to the selected scenario.
 It may seem unnecessary to write these kind of tests for fundamental operations while the application is tested manually many times before it is realeased.
 However, test coverage of basic functionality really helps to quickly find regressions when a lot of changes are made.
 This applies especially for development of large enterprise applications where it is quite likely that a small modification of source code can cause serious problems and there is no time to check everything manually after each change.
@@ -665,7 +667,7 @@ Besides other components it includes WebDriver, a tool which makes direct calls 
 WebDriver is the name of the key interface against which tests should be written in Java.
 The implementing classes are for example ChromeDriver, FirefoxDriver or SafariDriver.
 In the past there were also some implementations supporting mobile testing, AndroidDriver and IPhoneDriver.
-However, they have moved to separate projects, Selendroid\footnotemark\footnotetext{\url{http://selendroid.io/}} and ios-driver\footnotemark\footnotetext{\url{http://ios-driver.github.io/ios-driver/}}, as they provide more complex functionality and can be used to write tests for native applications on the given platform as well.
+However, they have been moved to separate projects, Selendroid\footnotemark\footnotetext{\url{http://selendroid.io/}} and ios-driver\footnotemark\footnotetext{\url{http://ios-driver.github.io/ios-driver/}}, as they provide more complex functionality and can be used for testing native applications on the given platform as well.
 
 \subsection{Selendroid}
 Selendroid is a test automation framework for native, hybrid and mobile web applications running on Android OS.
@@ -677,7 +679,7 @@ It can make use of the Android Emulator or a physical device plugged in via USB 
 \label{subsec:test-suite}
 The test suite developed for the mobile version of jBPM Console is based on Selendroid.
 All tests are run in a virtual environment of the Android Emulator.
-Before each test the emulator is started and the web application is loaded in its web browser.
+Before each test, the emulator is started and the web application is loaded in a web browser.
 
 The suite includes tests for some basic application functionality.
 It tries to run a new process instance and check if it appears in the list of all instances.
@@ -688,19 +690,19 @@ They try to claim, release, start and complete a task and check if its status is
 \chapter{Summary}
 The main goal of this thesis was to find the ideal solution for a mobile version of the jBPM Console and implement it.
 This was achieved and the work progress is documented in the previous chapters.
-The source code of the application as well as the distribution WAR file are attached.
+The source code of the application as well as the deployable WAR file are attached.
 
 Since the beginning of the development process, all steps were regularly discussed with one of the jBPM core developers, Mauricio Salatino.
 This was done in order to ensure that the project would meet the expectations and be accepted by the jBPM community.
 As mentioned in section~\ref{subsec:integration}, the mobile application has already been incorporated into the jBPM Console project.
-However, it is now only in the mobile-integration branch.
-To get to the master branch there needs to be some discussion in the jBPM community and it will probably also need to be approved by Red Hat, the company which is in charge of the project.
+However, it is now only in the \emph{mobile-integration} branch.
+To get to the \emph{master} branch there needs to be some discussion in the jBPM community and it will probably also need to be approved by Red Hat, the company which is in charge of the project.
 
 Although the basic functionality has been implemented, there are still many ways in which the mobile application can be enhanced.
 Besides adding some new screens or extending the existing ones, other changes may also be performed.
 For example the application's look\&feel could be improved by applying some nice-looking CSS.
 Or it might be optimized also for tablets which offer higher screen resolution than smartphones.
-The author of this thesis plans to continue developing the application and implement some of the enhancements mentioned above.
+The author of this thesis plans to continue developing the application and will try to implement some of the enhancements mentioned above.
 
 \printbibliography
 
