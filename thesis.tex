@@ -19,6 +19,9 @@
 \setcounter{biburllcpenalty}{100}
 \addbibresource{bibliography.bib}
 
+\def\universityname{Masaryk University}
+\def\facultyname{Faculty of Informatics}
+
 \begin{document}
 \FrontMatter
 \ThesisTitlePage
@@ -33,8 +36,8 @@ Foremost, I would like to express my gratitude to my technical supervisor Ing. J
 
 I would also like to thank my advisor RNDr. Adam Rambousek for helping me with all formal aspects of academic writing.
 
-Another big thanks belongs to the jBPM community, especially to Ing. Mauricio Salatino who introduced me to the jBPM Console project and helped me a lot with integrating my work into it.
-Without him I would never be able to successfully finish the practical part of my thesis.
+Another big thanks belongs to the jBPM community, especially to Ing. Mauricio Salatino, who introduced me to the jBPM Console project and helped me a lot with integrating my work into it.
+Without him I would never have been able to successfully finish the practical part of my thesis.
 \end{ThesisThanks}
 
 \begin{ThesisAbstract}
@@ -55,8 +58,8 @@ Nowadays, a rapid growth of the market with smart mobile devices like smartphone
 The parameters of these devices are nearly reaching the performance of classic desktop computers.
 Unlike them, mobile devices derive benefits from mobility as users have an access to their data and applications whenever or wherever they need it.
 However, the burden of this feature is lower comfort while using most of the common applications.
-Their graphical user interface (GUI) is often optimized just for standard desktop environments and does not take into account lower screen resolution that is typical for mobile devices.
-The other problem is much higher finess of their screens which causes that tiny fonts are usually unreadable without zooming in and also makes it difficult to manipulate with very small control components.
+Their graphical user interface (GUI) is often optimized just for standard desktop environments and does not take into account lower screen resolution which is typical for mobile devices.
+The other problem is much higher finess of their screens, which causes that tiny fonts are usually unreadable without zooming in and also makes it difficult to manipulate with very small control components.
 
 The goal of this thesis is to look through the problematics of developing applications optimized for mobile devices, compare advantages and disadvantages of different approaches and find the optimal solution for the jBPM Console\footnotemark\footnotetext{\url{http://www.jboss.org/jbpm/components/console}}.
 The mobile version of this application has been proposed on the website of the JBoss community\footnotemark\footnotetext{\url{https://community.jboss.org/wiki/JbpmProjects}} as a further extension of the jBPM project\footnotemark\footnotetext{\url{http://www.jboss.org/jbpm.html}}.
@@ -72,7 +75,7 @@ Then pros and cons of using the given approach are mentioned and the most suitab
 Next chapter introduces business processes, describes how they can be automated and how modern enterprise applications based on them are developed.
 Business process management (BPM) suite called jBPM is introduced and the description of how its workflow engine works and how it can be used by developers of enterprise applications is given.
 Also a web-based application jBPM Console, which is based on the jBPM engine and provides rich set of tools for complex management of business processes, is introduced.
-The application is only described from the user's point of view.
+The application is mainly described from the user's point of view.
 The underlying services are mentioned later during the implementation phase when some of them are re-used in the mobile application.
 The following chapter deals with the analysis and design of the application being developed.
 A previous attempt to create a mobile version of the jBPM Console is also mentioned.
@@ -124,9 +127,9 @@ This may prevent developers from making significant changes and slow down the wh
 \section{Mobile web applications}
 Mobile web applications are special web pages optimized for mobile devices.
 They take into account the limitations and differences of these devices in comparison with desktop computers.
-These include smaller screen size, higher fineness of the display, absence of mouse and keyboard, presence of touch control and limited computation power \cite{wroblewski11}.
+These include smaller screen size, higher fineness of the display, absence of mouse and keyboard, presence of touch control, limited computation power and slower internet connection \cite{wroblewski11}.
 But the basic principles of all web pages are also applied in this case.
-So you can still find HyperText Markup Language (HTML), Cascading Style Sheets (CSS) and JavaScript on the client's side and the server-side functionality implemented in any suitable language, e.g. PHP, Ruby, Python, Perl or even Java.
+So you can still find HyperText Markup Language (HTML), Cascading Style Sheets (CSS) and JavaScript on the client's side and the server-side functionality implemented in any suitable language, e.g. Java, Perl, PHP, Python or Ruby.
 
 The biggest advantage of this approach in comparison with the native applications is that developers do not need to maintain more versions of the application.
 This does not only mean that there is one common version for all platforms as users access the application using the web browser.
@@ -141,7 +144,7 @@ Another thing is the monetizing of this kind of application.
 The developers have to set up the advertisements on their own.
 They also have to implement their own solution to charge users for using the application.
 
-When designing a mobile web application it is often created as a subset of the funcionality of an existing web application.
+When designing a mobile web application, it is often created as a subset of the funcionality of an existing web application.
 In such cases there is usually an intension to somehow connect these two versions to support uniformity and avoid code duplicates.
 Nowadays there are basically two ways how to integrate them to one final solution.
 
@@ -286,7 +289,7 @@ The history of the process variables can also be viewed here.
 The Tasks perspective is the one responsible for human tasks management.
 Users can view all the tasks that belongs to them or to the groups they are members of.
 These tasks are usually created as a result of business process execution but users are also able to create their own personal tasks which do not participate in any process.
-Several actions can be executed on these tasks like claiming the ones that nobody is working on, starting work on the claimed tasks and completing tasks.
+Several actions can be executed on these tasks like claiming the ones that nobody is working on, starting work on the claimed tasks and completing them.
 
 \subsection{Modular approach}
 
@@ -688,9 +691,9 @@ The other tests work with tasks.
 They try to claim, release, start and complete a task and check if its status is correctly changed after each of these operations.
 
 \chapter{Summary}
-The main goal of this thesis was to find the ideal solution for a mobile version of the jBPM Console and implement it.
+The main goal of this thesis was to find a solution for a mobile version of the jBPM Console and implement it.
 This was achieved and the work progress is documented in the previous chapters.
-The source code of the application as well as the deployable WAR file are attached.
+The source code of the application and the test suite as well as the pre-configured JBoss AS including deployable WAR file are attached.
 
 Since the beginning of the development process, all steps were regularly discussed with one of the jBPM core developers, Mauricio Salatino.
 This was done in order to ensure that the project would meet the expectations and be accepted by the jBPM community.
