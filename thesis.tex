@@ -3,7 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[backend=biber,sorting=none]{biblatex}
-\usepackage[plainpages=false,pdfpagelabels,unicode]{hyperref} %hidelinks
+\usepackage[plainpages=false,pdfpagelabels,unicode,hidelinks]{hyperref} %hidelinks
 \usepackage[final]{graphicx}
 \thesistitle{Mobile Access to jBPM Console}
 \thesissubtitle{Bachelor thesis}
@@ -532,14 +532,14 @@ The second one can be used to get some basic information about entities, domain 
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=\textwidth]{images/refresh-instances.pdf}
-\caption{Refreshing the list of process instances using DataServiceEntryPoint}
+\caption{Refreshing list of process instances using DataServiceEntryPoint}
 \label{fig:refresh-instances}
 \end{figure}
 
 The sequence diagram in figure~\ref{fig:refresh-instances} is showing how DataService-EntryPoint is used in the mobile application.
 This example describes the whole process of refreshing the list of process instances.
 The components on the left are compiled to JavaScript and operate on the client side, while the components on the right are run on the application server.
-The calling of getProcessInstances() method on DataServiceEntryPoint is implemented using RPC.
+The calling of \verb|getProcessInstances()| method on DataServiceEntryPoint is implemented using RPC.
 
 \subsection{KieSessionEntryPoint}
 
@@ -553,7 +553,7 @@ It allows starting new process instances, aborting, suspending, and signaling th
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=\textwidth]{images/abort-process.pdf}
-\caption{Aborting a process instance using KieSessionEntryPoint}
+\caption{Aborting process instance using KieSessionEntryPoint}
 \label{fig:abort-process}
 \end{figure}
 
@@ -568,7 +568,7 @@ It is also a simple adapter like DataServiceEntryPoint so it does not add any fu
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=\textwidth]{images/complete-task.pdf}
-\caption{Completing a task using TaskServiceEntryPoint}
+\caption{Completing task using TaskServiceEntryPoint}
 \label{fig:complete-task}
 \end{figure}
 
