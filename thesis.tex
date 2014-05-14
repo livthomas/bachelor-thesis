@@ -69,7 +69,7 @@ The resulting product should be integrated into the jBPM Console project.
 This work does not aim to make a complex review of the given field and is rather focused on the topics relevant to the implementation part.
 
 The thesis starts with the analysis of different approaches to mobile applications development.
-These are divided into the three main categories -- native, web, and hybrid -- based on their similar attributes.
+These are divided into the three main categories -- native, web, and hybrid -- based on their attributes.
 Each category is introduced naming its characteristic features.
 Then pros and cons of using the given approach are mentioned and the most suitable use case is outlined.
 Next chapter introduces business processes, describes how they can be automated and how modern enterprise applications based on them are developed.
@@ -189,7 +189,7 @@ A business process is a collection of activities that need to be performed in or
 From a technical point of view it can be described as a sequence of steps ordered by their time continuity.
 Thanks to that a business process can be visualized as a flowchart\footnotemark\footnotetext{A flowchart is a type of diagram used to visualize a process. The individual steps of this process are displayed as various boxes which are connected to each other with arrows determining their order.}.
 
-Nowadays, business processes are quite complex and being changed so often, that it is practically impossible to hardcode them into the applications and be efficient while adapting to the changes at the same time.
+Nowadays, business processes are quite complex and so often changed, that it is practically impossible to hardcode them into the applications and be efficient while adapting to the changes at the same time.
 That is why business process management (BPM) tools are used. % BPM vysvetlene uz v uvode
 They take control of the maintenance of business processes and provide API through which other applications can easily manipulate with these processes.
 This allows developers to focus on the application itself because they do not need to adapt it to the changes in business processes as it is the role of the used BPM tool.
@@ -198,7 +198,7 @@ This allows developers to focus on the application itself because they do not ne
 In the past it was common that every BPM suite implemented and used its own representation of business processes.
 As portability became one of the key issues, it was necessary to somehow unify these representations and standardize the final outcome so users would be able to reuse their business processes across different BPM tools.
 
-This is why Business Process Model and Notation (BPMN), a~standard maintained by the Object Management Group (OMG), was created.
+This is why Business Process Model and Notation (BPMN), an open standard maintained by the Object Management Group (OMG), was created.
 The latest version, BPMN 2.0, is both a business-friendly diagramming notation and an executable process language \cite{silver11}.
 The graphical notation of business processes is very similar to activity diagrams from Unified Modelling Language (UML).
 A process model is stored as an Extensible Markup Language (XML) file which besides diagram description contains also other information about the process like its data, messages, task assignments etc.
@@ -252,7 +252,7 @@ This is how the interaction between a user and a process instance is ensured and
 
 \section{jBPM Console}
 The jBPM Console is a web-based tool built on the top of the jBPM services.
-It is composed of several components like Guvnor, Designer, Form Modeller and Dashboard.
+It is composed of several components like Guvnor, jBPM Designer, Form Modeller and Dashboard.
 All this projects grouped together form one unified environment for assets management, business process modeling, managing process runtime and business activity monitoring.
 
 \begin{figure}[ht!]
@@ -286,7 +286,7 @@ All process instances are listed in the process instance list where they can be 
 The running process can be aborted or a signal can be sent to it by the user.
 The history of the process variables can also be viewed there.
 
-The Tasks perspective is the one responsible for human tasks management.
+The Tasks perspective is the only one responsible for human tasks management.
 Users can view all the tasks that belong to them or to the groups they are members of.
 These tasks are usually created as a result of business process execution, but users are also able to create their own personal tasks which do not participate in any process.
 Several actions can be executed on these tasks such as claiming the ones that nobody is working on, starting work on the claimed tasks, and completing them.
@@ -399,14 +399,13 @@ The application should provide the functionality to manipulate with process runt
 Going more into details, users will be able to see the list of available process definitions and for each one of them start a new instance.
 They may list all running process instances and abort any of them as well.
 The application also allows users to show their tasks, create a new one, claim available group tasks, release them, start working on a task, complete it, or delegate it to someone else.
-
 These are all actions peformed by users on a daily basis.
 Other functionality of the jBPM Console is not inteded to be a part of the mobile version.
 It would be very unpractical to set up projects or design new processes on mobile devices.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{images/use-case.pdf}
+\includegraphics[width=0.9\textwidth]{images/use-case.pdf}
 \caption{Use case diagram}
 \label{fig:use-case}
 \end{figure}
@@ -478,7 +477,7 @@ Each of them is briefly introduced and then the explanation why it was decided t
 
 \subsection{Google Web Toolkit}
 Google Web Toolkit (GWT) is a development toolkit for building and optimizing complex browser-based applications \cite{gwtoverview}.
-The biggest difference in comparison with other tools is the fact that using GWT developers write their code in Java and it is then compiled to JavaScript.
+In comparison with other tools, the biggest difference is the fact that using GWT developers write their code in Java and it is then compiled to JavaScript.
 This brings some benefits when creating large applications as there are lots of advanced tools for development in Java and the language itself compared with JavaScript has some useful features like strong static type-checking and object-oriented design.
 
 It was decided to use GWT because the jBPM Console is based on it and there was a demand to reuse as many components as possible.
@@ -511,7 +510,7 @@ One of the main goals during the development of the mobile version of the jBPM C
 Since it was decided to use the same technologies, the mobile application is able to call the jBPM services the same way as the original application does.
 This section introduces these services, describes how exactly they are called and what is executed in the background.
 
-Basically, all re-used components from the jBPM Console described below are designed the same way.
+Basically, all re-used components from the jBPM Console project described below are designed the same way.
 Each one of them is a wrapper for several jBPM services.
 From the architectural point of view they are all adapters so they provide interfaces different from services they call in the background.
 Going more into details, they transform database entities returned by jBPM services to data transfer objects (DTOs), which can be serialized and sent over the wire between server and clients.
@@ -638,17 +637,17 @@ That is why this approach is mostly used during the development phase of an appl
 In this section, three different ways of manual testing used during the development of the mobile application are mentioned -- desktop browsers, physical devices, and the Android Emulator.
 
 \subsection{Desktop browsers}
-During the process of its development, the application was mostly tested in desktop web browsers, namely Chromium and Google Chrome.
-It is because the application was run in the GWT debug mode which requires the GWT developer plugin to be installed in the browser.
-This plugin is only available for desktop browsers.
-Although it may seem inappropriate to test a mobile web application in desktop browsers, there is not a big difference in comparison with mobile browsers.
-Both Chromium and Google Chrome browsers use WebKit-based layout engine and both Android and iOS default browsers use WebKit so the rendering of the page is practically the same.
-There is only difference in the appearance of the application as MGWT uses platform-specific styles by default.
+During the process of its development, the application was mostly tested in desktop browsers, namely Chromium and Google Chrome.
+It is because the application was run in the GWT debug mode which requires the GWT developer plugin to be installed.
+This add-on is only available for desktop browsers.
+Although it may seem inappropriate to test a mobile web application in desktop browsers, there is not a big difference in comparison with the mobile ones.
+Both Chromium and Google Chrome use WebKit-based layout engine and both Android and iOS default browsers use WebKit so the rendering of the page is practically the same.
+There is only difference in the appearance of the application as MGWT tries to adopt the platform-specific look\&feel by default.
 
 \subsection{Physical devices}
 Later, when it was possible to deploy the application on an application server, it was also tested using physical devices.
 Apple iPhone 4S and HTC Desire SV were chosen as representatives of the two most popular platforms, iOS and Android, as they were easily accessible to the author of this thesis.
-On each platform the application looks slightly different as MGWT tries to adopt the platform-specific look\&feel.
+During this phase of testing, some platform-specific defects were discovered and fixed.
 
 \subsection{Android Emulator}
 The Android Emulator is a mobile device emulator included in the Android SDK\footnotemark\footnotetext{\url{http://developer.android.com/tools/help/emulator.html}}.
@@ -663,7 +662,7 @@ However, there were only several attempts and the emulator has mostly been used 
 In case of web-based applications, automated functional testing involves clicking on the given elements and filling in the forms according to the selected scenario.
 It may seem unnecessary to write these kind of tests for fundamental operations while the application is tested manually many times before it is realeased.
 However, test coverage of basic functionality really helps to quickly find regressions when a lot of changes are made.
-This applies especially for development of large enterprise applications where it is quite likely that a small modification of source code can cause serious problems and there is no time to check everything manually after each change.
+This applies especially to the development of large enterprise applications where it is quite likely that a small modification of source code can cause serious problems and there is no time for checking everything manually after each change.
 
 \subsection{Selenium}
 Selenium is a suite of tools to automate web browsers across many platforms.
@@ -671,7 +670,7 @@ Besides other components it includes WebDriver, a tool which makes direct calls 
 WebDriver is the name of the key interface against which tests should be written in Java.
 The implementing classes are, for example, ChromeDriver, FirefoxDriver, or SafariDriver.
 In the past there were also some implementations supporting mobile testing, AndroidDriver and IPhoneDriver.
-However, they have been moved to separate projects, Selendroid\footnotemark\footnotetext{\url{http://selendroid.io/}} and ios-driver\footnotemark\footnotetext{\url{http://ios-driver.github.io/ios-driver/}}, as they provide more complex functionality and can be used for testing native applications on the given platform as well.
+However, they have already been moved to separate projects, Selendroid\footnotemark\footnotetext{\url{http://selendroid.io/}} and ios-driver\footnotemark\footnotetext{\url{http://ios-driver.github.io/ios-driver/}}, as they provide more complex functionality and can be used for testing native applications on the given platform as well.
 
 \subsection{Selendroid}
 Selendroid is a test automation framework for native, hybrid, and mobile web applications running on Android OS.
@@ -693,8 +692,8 @@ They try to claim, release, start, and complete a task and check if its status i
 
 \chapter{Summary}
 The main goal of this thesis was to find a solution for a mobile version of the jBPM Console and implement it.
-This was achieved and the work progress is documented in the previous chapters.
-The source code of the application and the test suite as well as the pre-configured JBoss Application Server including deployable WAR file are attached.
+This has been achieved and the work progress is documented in the previous chapters.
+The source code of the application and the test suite as well as the pre-configured JBoss Application Server including built application are attached.
 
 Since the beginning of the development process, all steps were regularly discussed with one of the jBPM core developers, Mauricio Salatino.
 This was done in order to ensure that the project would meet the expectations and be accepted by the jBPM community.
@@ -713,6 +712,9 @@ The author of this thesis plans to continue developing the application and will 
 \appendix
 
 \chapter{Electronic attachments}
-
+All the attachments are placed in \verb|attachments.zip| archive stored in the web repository\footnotemark\footnotetext{\url{http://is.muni.cz/th/396542/fi_b/}}.
+This file contains source code of both the application itself and the test suite.
+The JBoss Application Server with the application ready to be deployed is included as well.
+The archive also contains the text file explaining how to run the server and access the application.
 
 \end{document}
